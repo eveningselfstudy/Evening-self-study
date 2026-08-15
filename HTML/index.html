@@ -1,1 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>晚自习</title>
+    <style>
+        :root {
+            --bg: #f7f3ef;
+            --card-bg: #ffffff;
+            --primary: #d4a5b5;
+            --primary-soft: #e8d3dc;
+            --primary-hover: #c892a6;
+            --accent: #a8d5c8;
+            --accent-soft: #d4ece2;
+            --text: #4a4a4a;
+            --text-secondary: #8a8580;
+            --text-light: #b5aea8;
+            --border: #ece6e0;
+            --input-bg: #fcf9f6;
+            --shadow: 0 12px 40px rgba(180, 150, 140, 0.15);
+            --shadow-hover: 0 16px 48px rgba(180, 150, 140, 0.20);
+            --radius: 20px;
+            --radius-sm: 14px;
+            --transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-image:
+                radial-gradient(ellipse at 20% 80%, rgba(212, 165, 181, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(168, 213, 200, 0.10) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 245, 235, 0.3) 0%, transparent 70%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px 38px 34px;
+            width: 100%;
+            max-width: 480px;
+            transition: all var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .container:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.3px;
+            margin: 0;
+        }
+
+        .length-section {
+            margin-bottom: 22px;
+        }
+
+        .length-section label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .length-badge {
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: var(--primary-soft);
+            color: var(--primary-hover);
+            padding: 3px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(212, 165, 181, 0.2);
+        }
+
+        .length-input-row input[type="number"] {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            background: var(--input-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            outline: none;
+            transition: all var(--transition);
+            -moz-appearance: textfield;
+            appearance: textfield;
+            font-family: inherit;
+        }
+
+        .length-input-row input[type="number"]::-webkit-outer-spin-button,
+        .length-input-row input[type="number"]::-webkit-inner-spin-button {
+            opacity: 0.6;
+            height: 32px;
+        }
+
+        .length-input-row input[type="number"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(212, 165, 181, 0.12);
+            background: #fff;
+        }
+
+        .options-section {
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .option-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            transition: all var(--transition);
+            border: 2px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text-secondary);
+            position: relative;
+            font-family: inherit;
+        }
+
+        .option-chip:hover {
+            border-color: #d5cdc5;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .option-chip.active {
+            border-color: var(--primary);
+            background: rgba(212, 165, 181, 0.08);
+            color: var(--text);
+            box-shadow: 0 0 0 3px rgba(212, 165, 181, 0.06);
+        }
+
+        .option-chip .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .dot.upper {
+            background: #e8a0b4;
+            box-shadow: 0 0 6px rgba(232, 160, 180, 0.3);
+        }
+        .dot.lower {
+            background: #a8d5c8;
+            box-shadow: 0 0 6px rgba(168, 213, 200, 0.3);
+        }
+        .dot.digit {
+            background: #b8c5d6;
+            box-shadow: 0 0 6px rgba(184, 197, 214, 0.3);
+        }
+
+        .option-chip:not(.active) .dot {
+            opacity: 0.3;
+            box-shadow: none;
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
+            transition: all var(--transition);
+            box-shadow: 0 4px 16px rgba(212, 165, 181, 0.20);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        .btn-generate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 60%);
+            border-radius: var(--radius-sm);
+            pointer-events: none;
+        }
+
+        .btn-generate:hover {
+            background: linear-gradient(135deg, #e8d3dc, #c8e6dc);
+            box-shadow: 0 6px 24px rgba(212, 165, 181, 0.30);
+            transform: translateY(-2px);
+        }
+
+        .btn-generate:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 12px rgba(212, 165, 181, 0.15);
+            transition: all 0.1s;
+        }
+
+        .result-section {
+            position: relative;
+        }
+
+        .result-box {
+            background: var(--input-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 56px 16px 18px;
+            min-height: 56px;
+            word-break: break-all;
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .result-box.has-value {
+            border-color: var(--primary-soft);
+            background: #fcfaf8;
+        }
+
+        .result-box .placeholder {
+            color: var(--text-light);
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            letter-spacing: 0;
+            font-size: 0.92rem;
+        }
+
+        .result-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .result-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .result-box::-webkit-scrollbar-thumb {
+            background: var(--primary-soft);
+            border-radius: 10px;
+        }
+
+        .btn-copy {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            z-index: 2;
+            padding: 0;
+        }
+
+        .btn-copy:hover {
+            border-color: var(--accent);
+            color: #5b8a7a;
+            background: var(--accent-soft);
+            box-shadow: 0 0 12px rgba(168, 213, 200, 0.20);
+        }
+
+        .btn-copy:active {
+            transform: translateY(-50%) scale(0.90);
+        }
+
+        .btn-copy.copied {
+            border-color: var(--accent);
+            color: #5b8a7a;
+            background: var(--accent-soft);
+            box-shadow: 0 0 16px rgba(168, 213, 200, 0.30);
+        }
+
+        .btn-copy svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            letter-spacing: 0.2px;
+            min-height: 20px;
+            font-weight: 400;
+        }
+
+        .toast {
+            position: fixed;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            background: #ffffff;
+            border: 1px solid var(--accent);
+            color: #5b8a7a;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.2px;
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(180, 150, 140, 0.15);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 28px 18px 22px;
+                border-radius: 16px;
+            }
+            .header h1 {
+                font-size: 1.35rem;
+            }
+            .options-section {
+                gap: 8px;
+            }
+            .option-chip {
+                padding: 8px 14px;
+                font-size: 0.78rem;
+                gap: 6px;
+            }
+            .result-box {
+                font-size: 0.95rem;
+                padding: 14px 52px 14px 14px;
+                max-height: 140px;
+                min-height: 48px;
+            }
+            .btn-copy {
+                width: 36px;
+                height: 36px;
+                right: 8px;
+            }
+            .btn-copy svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                padding: 20px 12px 18px;
+            }
+            .option-chip {
+                padding: 6px 10px;
+                font-size: 0.72rem;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>随机字符串</h1>
+        </div>
+
+        <div class="length-section">
+            <label for="lengthInput">
+                <span>📏 长度</span>
+                <span class="length-badge">∞ 无上限</span>
+            </label>
+            <div class="length-input-row">
+                <input type="number" id="lengthInput" value="32" min="1" step="1" placeholder="任意长度">
+            </div>
+        </div>
+
+        <div class="options-section" id="optionsSection">
+            <div class="option-chip active" data-type="uppercase" role="checkbox" aria-checked="true" tabindex="0">
+                <span class="dot upper"></span> A–Z
+            </div>
+            <div class="option-chip active" data-type="lowercase" role="checkbox" aria-checked="true" tabindex="0">
+                <span class="dot lower"></span> a–z
+            </div>
+            <div class="option-chip active" data-type="digits" role="checkbox" aria-checked="true" tabindex="0">
+                <span class="dot digit"></span> 0–9
+            </div>
+        </div>
+
+        <button class="btn-generate" id="btnGenerate">✦ 生成</button>
+
+        <div class="result-section">
+            <div class="result-box" id="resultBox">
+                <span class="placeholder">点击「生成」获取随机字符串</span>
+            </div>
+            <button class="btn-copy" id="btnCopy" title="复制" aria-label="复制">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+            <div class="char-count" id="charCount"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✅ 已复制</div>
+
+    <script>
+        (function() {
+            const lengthInput = document.getElementById('lengthInput');
+            const optionChips = document.querySelectorAll('.option-chip');
+            const btnGenerate = document.getElementById('btnGenerate');
+            const resultBox = document.getElementById('resultBox');
+            const btnCopy = document.getElementById('btnCopy');
+            const charCount = document.getElementById('charCount');
+            const toast = document.getElementById('toast');
+
+            let generatedString = '';
+            let toastTimer = null;
+
+            const charSets = {
+                uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                lowercase: 'abcdefghijklmnopqrstuvwxyz',
+                digits: '0123456789',
+            };
+
+            function getSelectedTypes() {
+                const selected = [];
+                optionChips.forEach(chip => {
+                    if (chip.classList.contains('active')) {
+                        selected.push(chip.dataset.type);
+                    }
+                });
+                return selected;
+            }
+
+            function getCombinedCharset(selectedTypes) {
+                let charset = '';
+                selectedTypes.forEach(type => {
+                    if (charSets[type]) charset += charSets[type];
+                });
+                return charset;
+            }
+
+            function generateSecureRandomString(length, charset) {
+                if (!charset || charset.length === 0) return '';
+                if (length <= 0) return '';
+                const charsetLength = charset.length;
+                const array = new Uint32Array(length);
+                crypto.getRandomValues(array);
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += charset[array[i] % charsetLength];
+                }
+                return result;
+            }
+
+            function generateString() {
+                let length = parseInt(lengthInput.value, 10);
+                if (isNaN(length) || length < 1) {
+                    lengthInput.value = 1;
+                    length = 1;
+                }
+
+                const selectedTypes = getSelectedTypes();
+                if (selectedTypes.length === 0) {
+                    resultBox.innerHTML = '<span style="color:#d4a5b5;">🌸 请至少选择一种字符类型</span>';
+                    resultBox.classList.remove('has-value');
+                    charCount.textContent = '';
+                    generatedString = '';
+                    updateCopyButtonState();
+                    return;
+                }
+
+                const charset = getCombinedCharset(selectedTypes);
+                generatedString = generateSecureRandomString(length, charset);
+
+                resultBox.textContent = generatedString;
+                resultBox.classList.add('has-value');
+                charCount.textContent = `共 ${generatedString.length} 个字符`;
+                updateCopyButtonState();
+
+                resultBox.style.transform = 'scale(1.005)';
+                setTimeout(() => {
+                    resultBox.style.transform = 'scale(1)';
+                }, 150);
+            }
+
+            function updateCopyButtonState() {
+                if (generatedString) {
+                    btnCopy.style.opacity = '1';
+                    btnCopy.style.pointerEvents = 'auto';
+                } else {
+                    btnCopy.style.opacity = '0.35';
+                    btnCopy.style.pointerEvents = 'none';
+                }
+            }
+
+            async function copyToClipboard() {
+                if (!generatedString) return;
+                try {
+                    await navigator.clipboard.writeText(generatedString);
+                    btnCopy.classList.add('copied');
+                    showToast('✅ 已复制到剪贴板');
+                    setTimeout(() => btnCopy.classList.remove('copied'), 1800);
+                } catch (_) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = generatedString;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        btnCopy.classList.add('copied');
+                        showToast('✅ 已复制到剪贴板');
+                        setTimeout(() => btnCopy.classList.remove('copied'), 1800);
+                    } catch (_) {
+                        showToast('❌ 复制失败，请手动复制');
+                    }
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            function showToast(message) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.textContent = message;
+                toast.classList.add('show');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, 2000);
+            }
+
+            function toggleOption(chip) {
+                const selectedTypes = getSelectedTypes();
+                if (chip.classList.contains('active') && selectedTypes.length <= 1) {
+                    showToast('🌸 至少保留一种字符类型');
+                    chip.style.animation = 'none';
+                    chip.offsetHeight;
+                    chip.style.animation = 'shake 0.4s ease';
+                    setTimeout(() => { chip.style.animation = ''; }, 400);
+                    return;
+                }
+                chip.classList.toggle('active');
+                chip.setAttribute('aria-checked', chip.classList.contains('active'));
+            }
+
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    20% { transform: translateX(-5px); }
+                    40% { transform: translateX(5px); }
+                    60% { transform: translateX(-3px); }
+                    80% { transform: translateX(3px); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+
+            btnGenerate.addEventListener('click', generateString);
+            btnCopy.addEventListener('click', copyToClipboard);
+
+            optionChips.forEach(chip => {
+                chip.addEventListener('click', () => toggleOption(chip));
+                chip.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleOption(chip);
+                    }
+                });
+            });
+
+            lengthInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    generateString();
+                }
+            });
+
+            lengthInput.addEventListener('blur', () => {
+                let val = parseInt(lengthInput.value, 10);
+                if (isNaN(val) || val < 1) lengthInput.value = 1;
+            });
+
+            function init() {
+                updateCopyButtonState();
+                generateString();
+            }
+            init();
+        })();
+    </script>
+</body>
+</html>
