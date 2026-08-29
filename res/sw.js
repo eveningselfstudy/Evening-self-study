@@ -1,13 +1,16 @@
 /* ============================================================
-   Service Worker —— 静态资源缓存
-   版本号变更时，旧缓存自动清理，资源重新加载
-   更新资源后请修改 CACHE_VERSION
+   Service Worker —— 精准资源缓存
+   策略：stale-while-revalidate + 浏览器 ETag 自动校验
+   - 首次访问：缓存所有静态资源
+   - 后续访问：先返回缓存（秒开），后台静默校验
+   - 文件未变化：服务器返回 304，不下载内容，零流量
+   - 文件已变化：服务器返回 200，下载新版本并更新缓存
+   - 新增/删除资源时修改本文件即可触发 SW 更新
    ============================================================ */
 
-const CACHE_VERSION = "v1.0.0";
-const CACHE_NAME = "blog-cache-" + CACHE_VERSION;
+const CACHE_NAME = "blog-cache-static";
 
-/* 需要缓存的静态资源列表 */
+/* 需要预缓存的静态资源列表 */
 const CACHE_URLS = [
   "./",
   "./index.html",
@@ -54,66 +57,53 @@ const CACHE_URLS = [
   "./Resources/Icons/settings.svg"
 ];
 
-/* 安装：缓存所有静态资源 */
+/* 安装：预缓存所有静态资源 */
 self.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(CACHE_URLS).catch(function(err) {
-        console.log("缓存部分资源失败:", err);
+        console.log("部分资源预缓存失败:", err);
       });
     })
   );
   self.skipWaiting();
 });
 
-/* 激活：清理旧版本缓存 */
+/* 激活：接管所有页面 */
 self.addEventListener("activate", function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(name) {
-          if (name !== CACHE_NAME) {
-            return caches.delete(name);
-          }
-        })
-      );
-    })
-  );
-  self.clients.claim();
+  event.waitUntil(self.clients.claim());
 });
 
-/* 请求拦截：缓存优先，网络回退 */
+/* 请求拦截：缓存优先 + 后台校验（ETag 自动判断是否变化） */
 self.addEventListener("fetch", function(event) {
-  /* 只缓存 GET 请求 */
+  /* 只处理 GET 请求 */
   if (event.request.method !== "GET") return;
 
+  /* 跨域请求（如字体）直接走网络，不缓存 */
+  var url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+
   event.respondWith(
-    caches.match(event.request).then(function(cached) {
-      if (cached) {
-        /* 命中缓存，同时后台更新（stale-while-revalidate） */
-        fetch(event.request).then(function(response) {
-          if (response && response.status === 200) {
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(event.request, response.clone());
-            });
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(event.request).then(function(cached) {
+        /* 后台校验：浏览器自动带 If-None-Match，未变化返回 304（零流量），变化返回 200（更新缓存） */
+        var fetchPromise = fetch(event.request).then(function(networkResponse) {
+          if (networkResponse && networkResponse.status === 200) {
+            cache.put(event.request, networkResponse.clone());
           }
-        }).catch(function() {});
-        return cached;
-      }
-      /* 未命中缓存，从网络获取并缓存 */
-      return fetch(event.request).then(function(response) {
-        if (response && response.status === 200 && response.type === "basic") {
-          var responseClone = response.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
-            cache.put(event.request, responseClone);
-          });
+          return networkResponse;
+        }).catch(function() {
+          return cached; /* 网络失败时返回缓存 */
+        });
+
+        /* 命中缓存：立即返回，同时后台校验更新 */
+        if (cached) {
+          fetchPromise.catch(function() {}); /* 后台更新不阻塞 */
+          return cached;
         }
-        return response;
-      }).catch(function() {
-        /* 网络失败且无缓存，返回离线提示（仅对HTML请求） */
-        if (event.request.headers.get("accept") && event.request.headers.get("accept").includes("text/html")) {
-          return caches.match("./index.html");
-        }
+
+        /* 未命中缓存：等待网络响应 */
+        return fetchPromise;
       });
     })
   );
