@@ -24,46 +24,17 @@
 
 <!-- ===== 加载页面 ===== -->
 <div class="loading-screen" id="loadingScreen">
-  <div class="constellation-wrap">
-    <svg class="constellation" viewBox="0 0 200 140" fill="none">
-      <!-- 背景小星星 -->
-      <circle class="bg-star" cx="12" cy="18" r="0.8"/>
-      <circle class="bg-star" cx="35" cy="10" r="1"/>
-      <circle class="bg-star" cx="58" cy="22" r="0.7"/>
-      <circle class="bg-star" cx="78" cy="8" r="0.9"/>
-      <circle class="bg-star" cx="100" cy="16" r="0.8"/>
-      <circle class="bg-star" cx="125" cy="12" r="1"/>
-      <circle class="bg-star" cx="150" cy="20" r="0.7"/>
-      <circle class="bg-star" cx="175" cy="14" r="0.9"/>
-      <circle class="bg-star" cx="190" cy="28" r="0.8"/>
-      <circle class="bg-star" cx="8" cy="50" r="0.7"/>
-      <circle class="bg-star" cx="25" cy="70" r="0.9"/>
-      <circle class="bg-star" cx="50" cy="85" r="0.8"/>
-      <circle class="bg-star" cx="75" cy="75" r="1"/>
-      <circle class="bg-star" cx="95" cy="95" r="0.7"/>
-      <circle class="bg-star" cx="120" cy="80" r="0.9"/>
-      <circle class="bg-star" cx="145" cy="100" r="0.8"/>
-      <circle class="bg-star" cx="165" cy="75" r="1"/>
-      <circle class="bg-star" cx="185" cy="90" r="0.7"/>
-      <circle class="bg-star" cx="15" cy="110" r="0.9"/>
-      <circle class="bg-star" cx="40" cy="125" r="0.8"/>
-      <circle class="bg-star" cx="65" cy="115" r="1"/>
-      <circle class="bg-star" cx="90" cy="128" r="0.7"/>
-      <circle class="bg-star" cx="115" cy="118" r="0.9"/>
-      <circle class="bg-star" cx="140" cy="130" r="0.8"/>
-      <circle class="bg-star" cx="170" cy="120" r="1"/>
-      <circle class="bg-star" cx="188" cy="112" r="0.7"/>
-      <!-- 动态星座内容（由JS生成） -->
-      <g id="constellationDynamic"></g>
-    </svg>
-    <div class="constellation-name" id="constellationName">北斗七星</div>
+  <canvas id="constellationCanvas"></canvas>
+  <div class="loading-info">
+    <div class="constellation-name-cn" id="constellationNameCN">大熊座</div>
+    <div class="constellation-name-en" id="constellationName">URSA MAJOR</div>
     <div class="constellation-fact" id="constellationFact"></div>
-  </div>
-  <div class="loading-tips">
-    <span class="tip-text" id="loadingTip">首次加载较慢，请稍候...</span>
+    <div class="loading-row">
+      <span class="loading-text">Loading</span>
+      <span class="loading-dots"><span></span><span></span><span></span></span>
+    </div>
   </div>
 </div>
-
 <!-- 背景层 -->
 <div class="bg-layer"></div>
 <div class="bg-overlay"></div>
@@ -206,7 +177,7 @@
 
 <!-- ===== 功能脚本 ===== -->
 <script src="Scripts/icon-loader.js"></script>
-<script src="Scripts/constellation.js"></script>
+<script src="Scripts/constellation-canvas.js"></script>
 <script src="Scripts/carousel.js"></script>
 <script src="Scripts/music.js"></script>
 <script src="Scripts/search.js"></script>
