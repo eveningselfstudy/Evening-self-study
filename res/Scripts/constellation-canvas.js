@@ -249,6 +249,24 @@
   var labelAlpha = 0;
   var time = 0;
 
+  /* ===== 等待词轮播 ===== */
+  var loadingTexts = [
+    "加载中", "正在准备资源", "马上就好", "请稍候",
+    "正在加载", "即将完成", "稍等片刻", "正在初始化"
+  ];
+  var loadingTextIndex = 0;
+  var loadingTextEl = document.getElementById("loadingText");
+  var loadingTextTimer = setInterval(function() {
+    loadingTextIndex = (loadingTextIndex + 1) % loadingTexts.length;
+    if (loadingTextEl) {
+      loadingTextEl.style.opacity = "0";
+      setTimeout(function() {
+        loadingTextEl.textContent = loadingTexts[loadingTextIndex];
+        loadingTextEl.style.opacity = "";
+      }, 300);
+    }
+  }, 2000);
+
   var nameEl = document.getElementById("constellationName");
   var nameCNEl = document.getElementById("constellationNameCN");
   var descEl = document.getElementById("constellationFact");
@@ -259,9 +277,9 @@
 
   /* 归一化坐标转Canvas坐标 */
   function toCanvas(star) {
-    var scale = Math.min(W, H) * 0.5;
+    var scale = Math.min(W, H) * 0.42;
     var ox = (W - scale) / 2;
-    var oy = (H - scale) / 2;
+    var oy = H * 0.06;
     return { x: ox + star.x * scale, y: oy + star.y * scale };
   }
 
@@ -337,7 +355,7 @@
 
     switch (phase) {
       case "drawing":
-        drawProgress += 0.004;
+        drawProgress += 0.003;
         drawConstellation(c, drawProgress, 1, false);
         if (drawProgress >= 1.05) {
           phase = "labeling";
@@ -357,14 +375,14 @@
       case "holding":
         drawConstellation(c, 1, 1, true);
         holdTimer++;
-        if (holdTimer > 160) {
+        if (holdTimer > 220) {
           phase = "fading";
           fadeAlpha = 1;
         }
         break;
 
       case "fading":
-        fadeAlpha -= 0.012;
+        fadeAlpha -= 0.018;
         labelAlpha = Math.max(0, labelAlpha - 0.025);
         drawConstellation(c, 1, Math.max(0, fadeAlpha), true);
         if (fadeAlpha <= 0) {
@@ -406,5 +424,6 @@
   window.stopConstellationCanvas = function() {
     stopped = true;
     if (rafId) cancelAnimationFrame(rafId);
+    if (loadingTextTimer) clearInterval(loadingTextTimer);
   };
 })();
