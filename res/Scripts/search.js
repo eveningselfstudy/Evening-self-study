@@ -5,7 +5,8 @@ let activeTag = null;
 let searchOpen = false;
 
 function renderTags() {
-  const allTags = [...new Set(articles.flatMap(a => a.tags))];
+  // 从统一标签配置文件读取，按配置顺序显示
+  const allTags = getAllTags();
   document.getElementById("tagScroll").innerHTML = `
     <button class="tag-btn ${activeTag === null ? 'active' : ''}" onclick="setActiveTag(null)">全部档案</button>
     ${allTags.map(t => `<button class="tag-btn ${activeTag === t ? 'active' : ''}" onclick="setActiveTag('${t}')">${t}</button>`).join("")}
