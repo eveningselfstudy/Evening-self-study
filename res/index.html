@@ -24,9 +24,38 @@
 
 <!-- ===== 加载页面 ===== -->
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-card">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">正在加载...</div>
+  <div class="loading-scene">
+    <!-- 地面 -->
+    <div class="ground">
+      <div class="ground-line"></div>
+    </div>
+    <!-- 障碍物（小骨头） -->
+    <div class="obstacle">
+      <svg viewBox="0 0 30 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 10 Q6 4 11 4 Q16 4 16 10 L19 10 Q19 4 24 4 Q24 10 19 10 L16 10 Q16 16 11 16 Q6 16 6 10 Z"/>
+      </svg>
+    </div>
+    <!-- 简笔画小猫 -->
+    <div class="cat">
+      <svg viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path class="cat-tail" d="M28 48 Q15 38 18 26"/>
+        <ellipse cx="52" cy="50" rx="24" ry="14"/>
+        <circle cx="76" cy="38" r="12"/>
+        <path d="M68 30 L70 21 L76 29"/>
+        <path d="M76 29 L82 21 L84 30"/>
+        <circle cx="79" cy="36" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="86" cy="40" r="1" fill="currentColor" stroke="none"/>
+        <line x1="84" y1="42" x2="92" y2="40"/>
+        <line x1="84" y1="44" x2="92" y2="45"/>
+        <line class="leg leg-1" x1="42" y1="62" x2="40" y2="73"/>
+        <line class="leg leg-2" x1="56" y1="62" x2="58" y2="73"/>
+        <line class="leg leg-3" x1="46" y1="62" x2="44" y2="73"/>
+        <line class="leg leg-4" x1="60" y1="62" x2="62" y2="73"/>
+      </svg>
+    </div>
+  </div>
+  <div class="loading-tips">
+    <span class="tip-text" id="loadingTip">首次加载较慢，请稍候...</span>
   </div>
 </div>
 
