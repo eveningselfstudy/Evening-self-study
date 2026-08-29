@@ -2,27 +2,58 @@
    主页主逻辑：初始化、页面跳转过渡、操作按钮、加载页控制
    ============================================================ */
 
+/* 更新等待词（带淡入淡出） */
+function setLoadingText(text) {
+  var el = document.getElementById("loadingText");
+  if (!el) return;
+  el.style.opacity = "0";
+  setTimeout(function() {
+    el.textContent = text;
+    el.style.opacity = "1";
+  }, 250);
+}
+
 /* ===== 页面初始化 + 资源加载完成检测 ===== */
 document.addEventListener("DOMContentLoaded", async function() {
   document.body.classList.add("page-enter");
-  // 注入 SVG 图标
+
+  /* 根据访问状态显示初始等待词 */
+  var isFirstVisit = !localStorage.getItem("blog_visited");
+  if (isFirstVisit) {
+    setLoadingText("首次加载较慢，请耐心等待");
+  } else {
+    setLoadingText("正在检查资源更新");
+  }
+
+  /* 阶段1：加载图标 */
+  setLoadingText("正在加载图标资源");
   await injectIcons();
-  // 初始化各模块
+
+  /* 阶段2：初始化组件 */
+  setLoadingText("正在初始化页面组件");
   initCarousels();
   initMusic();
   renderTags();
   renderTimeline();
-  // 等所有图片（含动态创建的文章封面、头像）加载完成
+
+  /* 阶段3：加载图片 */
+  setLoadingText("正在加载图片资源");
   await waitForAllImages();
-  // 标记已访问
+
+  /* 标记已访问 */
   localStorage.setItem("blog_visited", "1");
-  // 停止Canvas星座动画
+
+  /* 阶段4：即将完成 */
+  setLoadingText("即将完成");
+
+  /* 停止Canvas星座动画 */
   if (window.stopConstellationCanvas) window.stopConstellationCanvas();
-  // 延迟淡出加载页
+
+  /* 延迟淡出加载页 */
   setTimeout(function() {
     var loadingScreen = document.getElementById("loadingScreen");
     if (loadingScreen) loadingScreen.classList.add("hidden");
-  }, 300);
+  }, 400);
 });
 
 /* 等待页面所有 img 元素加载完成 */
