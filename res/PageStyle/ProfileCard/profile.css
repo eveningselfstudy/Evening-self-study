@@ -1,0 +1,112 @@
+/* ============================================================
+   个人信息卡片
+   ============================================================ */
+.profile-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid #fff;
+  box-shadow: 0 3px 12px rgba(236, 72, 153, 0.2);
+  background: linear-gradient(135deg, #fbcfe8, #d8b4fe);
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-info { flex: 1; min-width: 0; }
+.profile-name {
+  font-family: "Noto Serif SC", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.profile-bio {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 底部按钮区：更多在左下角，设置/GitHub/文档在右下角 */
+.profile-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.profile-actions-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 方形功能按钮 */
+.action-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  padding: 0;
+}
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.action-btn svg { width: 18px; height: 18px; }
+
+/* 更多按钮（渐变胶囊） */
+.more-btn-inline {
+  height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent-2));
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 12px rgba(236, 72, 153, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.more-btn-inline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(236, 72, 153, 0.4);
+}
+.more-btn-inline svg { width: 16px; height: 16px; }
