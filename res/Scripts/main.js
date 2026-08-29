@@ -2,6 +2,31 @@
    主页主逻辑：初始化、页面跳转过渡、操作按钮、加载页控制
    ============================================================ */
 
+/* ===== 自动检测资源更新 ===== */
+async function checkResourceUpdate() {
+  try {
+    /* fetch当前页面（禁用缓存），通过内容哈希判断是否更新 */
+    var res = await fetch(window.location.pathname, { cache: "no-cache" });
+    var text = await res.text();
+    /* 简单哈希：内容长度 + 首尾特征，足够判断是否变更 */
+    var hash = text.length + "|" + text.substring(0, 80) + "|" + text.substring(text.length - 80);
+    var cached = localStorage.getItem("site_content_hash");
+    if (cached && cached !== hash) {
+      /* 检测到更新，保存新哈希并强制刷新 */
+      localStorage.setItem("site_content_hash", hash);
+      setLoadingText("检测到更新，正在刷新...");
+      setTimeout(function() { window.location.reload(true); }, 500);
+      return true;
+    }
+    if (!cached) {
+      localStorage.setItem("site_content_hash", hash);
+    }
+  } catch(e) {
+    /* 网络错误时跳过检测，不影响正常加载 */
+  }
+  return false;
+}
+
 /* 更新等待词（带淡入淡出） */
 function setLoadingText(text) {
   var el = document.getElementById("loadingText");
@@ -16,6 +41,9 @@ function setLoadingText(text) {
 /* ===== 页面初始化 + 资源加载完成检测 ===== */
 document.addEventListener("DOMContentLoaded", async function() {
   document.body.classList.add("page-enter");
+
+  /* 自动检测资源更新（后台并行，不阻塞加载） */
+  checkResourceUpdate();
 
   /* 根据访问状态显示初始等待词 */
   var isFirstVisit = !localStorage.getItem("blog_visited");
@@ -113,3 +141,30 @@ function handleAction(type) {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && searchOpen) toggleSearch();
 });
+
+/* ===== 自动检测资源更新 ===== */
+(function() {
+  /* 从当前页面提取当前版本号 */
+  var currentVersion = "";
+  var scripts = document.querySelectorAll("script[src]");
+  for (var i = 0; i < scripts.length; i++) {
+    var src = scripts[i].getAttribute("src");
+    var m = src.match(/\?v=(\d+)/);
+    if (m) { currentVersion = m[1]; break; }
+  }
+  if (!currentVersion) return;
+
+  /* 页面加载3秒后，fetch当前HTML检查是否有新版本 */
+  setTimeout(function() {
+    fetch(window.location.pathname + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function(res) { return res.text(); })
+      .then(function(html) {
+        var newMatch = html.match(/\?v=(\d+)/);
+        if (newMatch && newMatch[1] !== currentVersion) {
+          /* 检测到新版本，自动刷新 */
+          window.location.reload();
+        }
+      })
+      .catch(function() { /* 检测失败忽略 */ });
+  }, 3000);
+})();
