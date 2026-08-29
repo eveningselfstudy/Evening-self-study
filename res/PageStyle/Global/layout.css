@@ -6,7 +6,11 @@
 .bg-layer {
   position: fixed;
   inset: 0;
-  background: url("../../Resources/Background/bg.wbep") center center / cover no-repeat;
+  background: linear-gradient(135deg, #fbcfe8 0%, #c4b5fd 50%, #93c5fd 100%);
+  background-image: url("../../Resources/Background/bg.webp"), linear-gradient(135deg, #fbcfe8 0%, #c4b5fd 50%, #93c5fd 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: -2;
 }
 .bg-overlay {
