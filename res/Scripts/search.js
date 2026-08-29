@@ -38,7 +38,7 @@ function renderTimeline() {
       <article class="timeline-article" onclick="window.location.href='${a.url}'">
         <div class="timeline-article-cover">${a.cover ? `<img src="${a.cover}" alt="${a.title}" loading="lazy">` : ''}</div>
         <div class="timeline-article-body">
-          <div class="timeline-article-date">${a.date}</div>
+          <div class="timeline-article-date"><svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>${a.date}</div>
           <h3 class="timeline-article-title">${a.title}</h3>
           <p class="timeline-article-excerpt">${a.excerpt}</p>
           <div class="timeline-article-tags">${a.tags.map(t => `<span class="timeline-article-tag">${t}</span>`).join("")}</div>
