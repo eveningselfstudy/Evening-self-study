@@ -1,7 +1,6 @@
 /* ============================================================
    全局布局：背景层、应用容器
    ============================================================ */
-
 /* 背景层 —— 独立固定定位div，避免 background-fixed 卡顿 */
 .bg-layer {
   position: fixed;
@@ -19,7 +18,6 @@
   background: var(--bg-overlay);
   z-index: -1;
 }
-
 .app {
   position: relative;
   z-index: 1;
@@ -28,7 +26,6 @@
   margin: 0 auto;
   padding: 32px 20px 50px;
 }
-
 /* 主视图 */
 .main-view {
   display: flex;
@@ -44,14 +41,12 @@
 .main-view.hidden {
   display: none;
 }
-
 /* 顶部：个人卡片 + 音乐播放器 并排 */
 .top-row {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 16px;
 }
-
 /* 日期图标 —— 通用 */
 .date-icon {
   width: 12px;
@@ -62,7 +57,7 @@
 }
 
 /* ============================================================
-   加载页面 —— 简笔画小猫奔跑
+   加载页面 —— Minecraft风格小猫奔跑
    ============================================================ */
 .loading-screen {
   position: fixed;
@@ -72,7 +67,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #f0f7ff 0%, #e8f0fe 60%, #dfe9f7 100%);
+  background: linear-gradient(180deg, #87ceeb 0%, #b0e0e6 40%, #98fb98 70%, #90ee90 100%);
   transition: opacity 0.6s ease, visibility 0.6s ease;
   overflow: hidden;
 }
@@ -85,101 +80,126 @@
 /* 场景区域 */
 .loading-scene {
   position: relative;
-  width: 280px;
-  height: 120px;
-  margin-bottom: 40px;
+  width: 300px;
+  height: 140px;
+  margin-bottom: 36px;
 }
 
-/* 地面 */
+/* 地面 —— Minecraft草地纹理 */
 .ground {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 14px;
   overflow: hidden;
+  border-radius: 2px;
 }
 .ground-line {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 200%;
-  height: 2px;
-  background: repeating-linear-gradient(
-    to right,
-    #b8cfe8 0,
-    #b8cfe8 12px,
-    transparent 12px,
-    transparent 24px
-  );
-  animation: groundMove 0.6s linear infinite;
+  height: 14px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #7cb342 0px, #7cb342 7px,
+      #689f38 7px, #689f38 14px,
+      #8bc34a 14px, #8bc34a 21px,
+      #7cb342 21px, #7cb342 28px
+    );
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,0.15),
+    inset 0 -3px 0 rgba(0,0,0,0.12);
+  animation: groundMove 0.5s linear infinite;
 }
 @keyframes groundMove {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-/* 障碍物（小骨头） */
+/* 障碍物：仙人掌 */
 .obstacle {
   position: absolute;
-  bottom: 12px;
-  right: -30px;
-  width: 26px;
-  height: 18px;
-  color: #7ba3d9;
-  animation: obstacleMove 2.4s linear infinite;
+  bottom: 14px;
+  right: -40px;
+  width: 40px;
+  height: 58px;
+  animation: obstacleMove 2.6s linear infinite;
+}
+.obstacle svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.15));
 }
 @keyframes obstacleMove {
-  0% { right: -30px; }
-  70% { right: 200px; }
-  100% { right: 200px; }
+  0% { right: -40px; }
+  68% { right: 210px; }
+  100% { right: 210px; }
 }
 
 /* 小猫 */
 .cat {
   position: absolute;
-  bottom: 8px;
-  left: 60px;
-  width: 90px;
-  height: 72px;
-  color: #4a6fa5;
-  animation: catJump 2.4s ease-in-out infinite;
+  bottom: 6px;
+  left: 50px;
+  width: 110px;
+  height: 90px;
+  animation: catJump 2.6s ease-in-out infinite;
 }
 .cat svg {
   width: 100%;
   height: 100%;
 }
 @keyframes catJump {
-  0%, 65%, 100% { transform: translateY(0); }
-  72% { transform: translateY(-28px); }
-  80% { transform: translateY(-28px); }
+  0%, 62%, 100% { transform: translateY(0); }
+  70% { transform: translateY(-34px); }
+  78% { transform: translateY(-34px); }
 }
 
 /* 腿部奔跑动画 */
 .cat .leg {
   transform-origin: top center;
 }
-.cat .leg-1 { animation: legRun1 0.3s ease-in-out infinite; }
-.cat .leg-2 { animation: legRun2 0.3s ease-in-out infinite; }
-.cat .leg-3 { animation: legRun2 0.3s ease-in-out infinite; }
-.cat .leg-4 { animation: legRun1 0.3s ease-in-out infinite; }
+.cat .leg-1 { animation: legRun1 0.28s ease-in-out infinite; }
+.cat .leg-2 { animation: legRun2 0.28s ease-in-out infinite; }
+.cat .leg-3 { animation: legRun2 0.28s ease-in-out infinite; }
+.cat .leg-4 { animation: legRun1 0.28s ease-in-out infinite; }
 @keyframes legRun1 {
-  0%, 100% { transform: rotate(-15deg); }
-  50% { transform: rotate(15deg); }
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-3px) rotate(8deg); }
 }
 @keyframes legRun2 {
-  0%, 100% { transform: rotate(15deg); }
-  50% { transform: rotate(-15deg); }
+  0%, 100% { transform: translateY(-3px) rotate(8deg); }
+  50% { transform: translateY(0) rotate(-8deg); }
+}
+
+/* 脚掌奔跑动画 */
+.cat .paw {
+  transform-origin: center top;
+}
+.cat .paw-1 { animation: pawRun1 0.28s ease-in-out infinite; }
+.cat .paw-2 { animation: pawRun2 0.28s ease-in-out infinite; }
+.cat .paw-3 { animation: pawRun2 0.28s ease-in-out infinite; }
+.cat .paw-4 { animation: pawRun1 0.28s ease-in-out infinite; }
+@keyframes pawRun1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes pawRun2 {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(0); }
 }
 
 /* 尾巴摆动 */
 .cat-tail {
   transform-origin: right center;
-  animation: tailWag 0.4s ease-in-out infinite;
+  animation: tailWag 0.35s ease-in-out infinite;
 }
 @keyframes tailWag {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(10deg); }
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(12deg); }
 }
 
 /* 提示文字 */
@@ -188,8 +208,9 @@
 }
 .tip-text {
   font-size: 14px;
-  color: #6b8cb8;
-  font-weight: 400;
+  color: #3d6b3d;
+  font-weight: 500;
   letter-spacing: 1px;
   transition: opacity 0.4s ease;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
 }
