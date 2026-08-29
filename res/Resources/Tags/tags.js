@@ -4,20 +4,10 @@
    文章数据中的 tags 字段只需填写标签名称，与此处对应
    ============================================================ */
 const tagConfig = [
-  { name: "算法",     color: "#ec4899" },
-  { name: "Leetcode", color: "#f59e0b" },
-  { name: "题解",     color: "#10b981" },
-  { name: "工作",     color: "#6366f1" },
-  { name: "前端",     color: "#3b82f6" },
-  { name: "JavaScript", color: "#eab308" },
-  { name: "原理",     color: "#8b5cf6" },
-  { name: "CSS",      color: "#ec4899" },
-  { name: "布局",     color: "#06b6d4" },
-  { name: "杂谈",     color: "#64748b" },
-  { name: "学习",     color: "#22c55e" },
-  { name: "规划",     color: "#f97316" },
-  { name: "Vue",      color: "#10b981" },
-  { name: "框架",     color: "#8b5cf6" }
+  { name: "数学", color: "#2563eb" },
+  { name: "导数", color: "#0891b2" },
+  { name: "极值", color: "#7c3aed" },
+  { name: "函数", color: "#059669" }
 ];
 
 /* 获取所有标签名称数组（按配置顺序） */
