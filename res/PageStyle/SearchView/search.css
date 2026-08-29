@@ -113,14 +113,13 @@
   overflow-x: auto;
   scrollbar-width: none;
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(-18px);
 }
 .tag-scroll-wrap::-webkit-scrollbar { display: none; }
 .search-view.visible .tag-scroll-wrap {
-  animation: tagSlideDown 0.5s var(--ease-out) 0.7s forwards;
+  animation: tagSlideDown 0.5s var(--ease-out) 0.7s backwards;
 }
 @keyframes tagSlideDown {
+  from { opacity: 0; transform: translateY(-18px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .tag-scroll {
