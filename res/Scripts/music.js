@@ -6,6 +6,7 @@
 let musicPlaying = false;
 let musicIndex = 0;
 let audioEl = null;
+let isSeeking = false;
 
 /* ===== 初始化 ===== */
 function initMusic() {
@@ -19,6 +20,7 @@ function initMusic() {
   audioEl.addEventListener("error", onMusicError);
 
   applyMusic();
+  initSeekDrag();
 }
 
 /* ===== 播放/暂停 ===== */
@@ -59,7 +61,7 @@ function updatePlayIcon(playing) {
 
 /* ===== 更新进度条 ===== */
 function updateProgressUI() {
-  if (!audioEl) return;
+  if (!audioEl || isSeeking) return;
   var cur = audioEl.currentTime || 0;
   var dur = audioEl.duration || 0;
   var percent = dur > 0 ? (cur / dur) * 100 : 0;
@@ -164,12 +166,49 @@ function applyMusic() {
   if (totalEl) totalEl.textContent = "00:00";
 }
 
-/* ===== 进度条点击跳转 ===== */
+/* ===== 进度条拖动 ===== */
+function getSeekPercent(clientX) {
+  var bar = document.getElementById("musicProgress");
+  if (!bar) return 0;
+  var r = bar.getBoundingClientRect();
+  return Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+}
+
 function seekMusic(e) {
   if (!audioEl || !audioEl.duration) return;
+  var percent = getSeekPercent(e.clientX);
+  audioEl.currentTime = percent * audioEl.duration;
+}
+
+function startSeek(e) {
+  if (!audioEl || !audioEl.duration) return;
+  isSeeking = true;
+  var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  var percent = getSeekPercent(clientX);
+  audioEl.currentTime = percent * audioEl.duration;
+  e.preventDefault();
+}
+
+function moveSeek(e) {
+  if (!isSeeking || !audioEl || !audioEl.duration) return;
+  var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  var percent = getSeekPercent(clientX);
+  audioEl.currentTime = percent * audioEl.duration;
+  e.preventDefault();
+}
+
+function endSeek(e) {
+  isSeeking = false;
+}
+
+/* 初始化进度条拖动事件 */
+function initSeekDrag() {
   var bar = document.getElementById("musicProgress");
   if (!bar) return;
-  var r = bar.getBoundingClientRect();
-  var percent = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
-  audioEl.currentTime = percent * audioEl.duration;
+  bar.addEventListener("mousedown", startSeek);
+  bar.addEventListener("touchstart", startSeek, { passive: false });
+  document.addEventListener("mousemove", moveSeek);
+  document.addEventListener("touchmove", moveSeek, { passive: false });
+  document.addEventListener("mouseup", endSeek);
+  document.addEventListener("touchend", endSeek);
 }
