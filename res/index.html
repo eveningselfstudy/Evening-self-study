@@ -22,6 +22,14 @@
 </head>
 <body>
 
+<!-- ===== 加载页面 ===== -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">正在加载...</div>
+  </div>
+</div>
+
 <!-- 背景层 -->
 <div class="bg-layer"></div>
 <div class="bg-overlay"></div>
@@ -168,6 +176,17 @@
 <script src="Scripts/music.js"></script>
 <script src="Scripts/search.js"></script>
 <script src="Scripts/main.js"></script>
+
+<!-- ===== Service Worker 注册（资源缓存） ===== -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function(err) {
+      console.log('ServiceWorker 注册失败:', err);
+    });
+  });
+}
+</script>
 
 </body>
 </html>
