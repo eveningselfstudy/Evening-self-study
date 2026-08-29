@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", async function() {
   await waitForAllImages();
   // 标记已访问
   localStorage.setItem("blog_visited", "1");
+  // 停止Canvas星座动画
+  if (window.stopConstellationCanvas) window.stopConstellationCanvas();
   // 延迟淡出加载页
   setTimeout(function() {
     var loadingScreen = document.getElementById("loadingScreen");
