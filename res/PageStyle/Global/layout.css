@@ -1,0 +1,49 @@
+/* ============================================================
+   全局布局：背景层、应用容器
+   ============================================================ */
+
+/* 背景层 —— 独立固定定位div，避免 background-fixed 卡顿 */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background: url("../../Resources/Background/bg.wbep") center center / cover no-repeat;
+  z-index: -2;
+}
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: -1;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 20px 50px;
+}
+
+/* 主视图 */
+.main-view {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: opacity 0.4s var(--ease-out), transform 0.45s var(--ease-out);
+}
+.main-view.closing {
+  opacity: 0;
+  transform: scale(0.72);
+  pointer-events: none;
+}
+.main-view.hidden {
+  display: none;
+}
+
+/* 顶部：个人卡片 + 音乐播放器 并排 */
+.top-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
