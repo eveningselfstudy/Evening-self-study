@@ -249,24 +249,6 @@
   var labelAlpha = 0;
   var time = 0;
 
-  /* ===== 等待词轮播 ===== */
-  var loadingTexts = [
-    "加载中", "正在准备资源", "马上就好", "请稍候",
-    "正在加载", "即将完成", "稍等片刻", "正在初始化"
-  ];
-  var loadingTextIndex = 0;
-  var loadingTextEl = document.getElementById("loadingText");
-  var loadingTextTimer = setInterval(function() {
-    loadingTextIndex = (loadingTextIndex + 1) % loadingTexts.length;
-    if (loadingTextEl) {
-      loadingTextEl.style.opacity = "0";
-      setTimeout(function() {
-        loadingTextEl.textContent = loadingTexts[loadingTextIndex];
-        loadingTextEl.style.opacity = "";
-      }, 300);
-    }
-  }, 2000);
-
   var nameEl = document.getElementById("constellationName");
   var nameCNEl = document.getElementById("constellationNameCN");
   var descEl = document.getElementById("constellationFact");
@@ -277,9 +259,9 @@
 
   /* 归一化坐标转Canvas坐标 */
   function toCanvas(star) {
-    var scale = Math.min(W, H) * 0.42;
+    var scale = Math.min(W, H) * 0.5;
     var ox = (W - scale) / 2;
-    var oy = H * 0.06;
+    var oy = (H - scale) / 2;
     return { x: ox + star.x * scale, y: oy + star.y * scale };
   }
 
@@ -293,6 +275,12 @@
   function drawConstellation(c, progress, alpha, showLabels) {
     var totalSeg = c.links.length;
     var starsDrawn = {};
+
+    /* 计算星座中心，用于标签定位（标签放在外侧，避免与连线重合） */
+    var cx = 0, cy = 0;
+    c.stars.forEach(function(s) { cx += s.x; cy += s.y; });
+    cx /= c.stars.length;
+    cy /= c.stars.length;
 
     /* 连线：纯黑色直线，逐段绘制 */
     c.links.forEach(function(link, i) {
@@ -335,12 +323,43 @@
       ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
       ctx.fill();
 
-      /* 星名标签 */
+      /* 星名标签：放在星座外侧，避免与连线重合 */
       if (showLabels && star.label && labelAlpha > 0) {
         ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
-        ctx.fillStyle = "rgba(0,0,0," + (0.6 * alpha * labelAlpha) + ")";
-        ctx.textAlign = "center";
-        ctx.fillText(star.label, pos.x, pos.y - size - 6);
+        ctx.fillStyle = "rgba(0,0,0," + (0.65 * alpha * labelAlpha) + ")";
+        /* 计算从中心到该星的方向，标签放在远离中心的一侧 */
+        var dx = star.x - cx;
+        var dy = star.y - cy;
+        var labelX, labelY, align;
+        if (Math.abs(dy) > Math.abs(dx)) {
+          /* 垂直方向为主：标签在上或下 */
+          if (dy < 0) {
+            /* 星在中心上方，标签放更上方 */
+            labelX = pos.x;
+            labelY = pos.y - size - 8;
+            align = "center";
+          } else {
+            /* 星在中心下方，标签放更下方 */
+            labelX = pos.x;
+            labelY = pos.y + size + 12;
+            align = "center";
+          }
+        } else {
+          /* 水平方向为主：标签在左或右 */
+          if (dx < 0) {
+            /* 星在中心左侧，标签放更左侧 */
+            labelX = pos.x - size - 8;
+            labelY = pos.y + 4;
+            align = "right";
+          } else {
+            /* 星在中心右侧，标签放更右侧 */
+            labelX = pos.x + size + 8;
+            labelY = pos.y + 4;
+            align = "left";
+          }
+        }
+        ctx.textAlign = align;
+        ctx.fillText(star.label, labelX, labelY);
       }
     });
   }
@@ -355,7 +374,7 @@
 
     switch (phase) {
       case "drawing":
-        drawProgress += 0.003;
+        drawProgress += 0.004;
         drawConstellation(c, drawProgress, 1, false);
         if (drawProgress >= 1.05) {
           phase = "labeling";
@@ -375,14 +394,14 @@
       case "holding":
         drawConstellation(c, 1, 1, true);
         holdTimer++;
-        if (holdTimer > 220) {
+        if (holdTimer > 160) {
           phase = "fading";
           fadeAlpha = 1;
         }
         break;
 
       case "fading":
-        fadeAlpha -= 0.018;
+        fadeAlpha -= 0.012;
         labelAlpha = Math.max(0, labelAlpha - 0.025);
         drawConstellation(c, 1, Math.max(0, fadeAlpha), true);
         if (fadeAlpha <= 0) {
@@ -418,12 +437,32 @@
   if (nameEl) nameEl.textContent = first.name;
   if (descEl) descEl.textContent = firstFact;
 
+  /* ===== 等待词轮播 ===== */
+  var loadingTextEl = document.getElementById("loadingText");
+  var loadingWords = [
+    "加载中", "正在加载", "请稍候", "马上就好",
+    "资源加载中", "正在准备", "稍等片刻", "加载资源",
+    "正在初始化", "请耐心等待"
+  ];
+  var wordIndex = 0;
+  if (loadingTextEl) loadingTextEl.textContent = loadingWords[0];
+  setInterval(function() {
+    if (stopped) return;
+    wordIndex = (wordIndex + 1) % loadingWords.length;
+    if (loadingTextEl) {
+      loadingTextEl.style.opacity = "0";
+      setTimeout(function() {
+        loadingTextEl.textContent = loadingWords[wordIndex];
+        loadingTextEl.style.opacity = "";
+      }, 300);
+    }
+  }, 2000);
+
   animate();
 
   /* ===== 对外停止接口 ===== */
   window.stopConstellationCanvas = function() {
     stopped = true;
     if (rafId) cancelAnimationFrame(rafId);
-    if (loadingTextTimer) clearInterval(loadingTextTimer);
   };
 })();
