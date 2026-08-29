@@ -15,7 +15,7 @@ const articles = [
     title: "函数极值点问题——含参指数型双极值点条件",
     date: "2026-08-29",
     excerpt: "已知函数 f(x)=2a^x-ex²，通过换元与图像分析，推导双极值点条件下参数 a 的取值范围。",
-    cover: "",
+    cover: "1.jpeg",
     tags: ["数学", "导数", "极值", "函数"],
     url: "https://www.kdocs.cn/l/cnuFStaqc8R2"
   }
