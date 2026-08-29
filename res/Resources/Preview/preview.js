@@ -5,13 +5,13 @@
    ============================================================ */
 const previewConfig = {
   large: {
-    articleIds: [1, 2, 3]
+    articleIds: [1]
   },
   wide: {
-    articleIds: [2, 4]
+    articleIds: [1]
   },
   small: {
-    articleIds: [3, 5]
+    articleIds: [1]
   }
 };
 
