@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   background: linear-gradient(135deg, #fbcfe8 0%, #c4b5fd 50%, #93c5fd 100%);
-  background-image: url("../../Resources/Background/bg.webp"), linear-gradient(135deg, #fbcfe8 0%, #c4b5fd 50%, #93c5fd 100%);
+  background-image: url("../../Resources/Background/bp.webp"), linear-gradient(135deg, #fbcfe8 0%, #c4b5fd 50%, #93c5fd 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
