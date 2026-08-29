@@ -8,10 +8,10 @@ const previewConfig = {
     articleIds: [1]
   },
   wide: {
-    articleIds: [1]
+    articleIds: []
   },
   small: {
-    articleIds: [1]
+    articleIds: []
   }
 };
 
