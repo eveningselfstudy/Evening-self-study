@@ -29,94 +29,54 @@
     <div class="ground">
       <div class="ground-line"></div>
     </div>
-    <!-- 障碍物：仙人掌（Minecraft等距3D） -->
+    <!-- 障碍物：仙人掌（黑白简笔画） -->
     <div class="obstacle">
-      <svg viewBox="0 0 52 74" fill="none">
-        <!-- 主体顶面 -->
-        <polygon points="21,4 35,4 42,10 28,10" fill="#a5d6a7"/>
-        <!-- 主体正面 -->
-        <polygon points="28,10 42,10 42,64 28,64" fill="#66bb6a"/>
-        <!-- 主体侧面 -->
-        <polygon points="35,4 42,10 42,64 35,58" fill="#2e7d32"/>
-        <!-- 左臂顶面 -->
-        <polygon points="5,26 16,26 23,32 12,32" fill="#a5d6a7"/>
-        <!-- 左臂正面 -->
-        <polygon points="12,32 23,32 23,52 12,52" fill="#66bb6a"/>
-        <!-- 左臂侧面 -->
-        <polygon points="16,26 23,32 23,52 16,46" fill="#2e7d32"/>
-        <!-- 右臂顶面 -->
-        <polygon points="42,36 49,36 53,40 46,40" fill="#a5d6a7"/>
-        <!-- 右臂正面 -->
-        <polygon points="46,40 53,40 53,56 46,56" fill="#66bb6a"/>
-        <!-- 右臂侧面 -->
-        <polygon points="49,36 53,40 53,56 49,52" fill="#2e7d32"/>
-        <!-- 刺 -->
-        <rect x="31" y="20" width="2" height="2" fill="#1b5e20"/>
-        <rect x="37" y="30" width="2" height="2" fill="#1b5e20"/>
-        <rect x="32" y="42" width="2" height="2" fill="#1b5e20"/>
-        <rect x="38" y="52" width="2" height="2" fill="#1b5e20"/>
-        <rect x="15" y="40" width="2" height="2" fill="#1b5e20"/>
-        <rect x="48" y="46" width="2" height="2" fill="#1b5e20"/>
+      <svg viewBox="0 0 40 60" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 主体：长方形 -->
+        <rect x="14" y="6" width="12" height="48" rx="3"/>
+        <!-- 左臂：长方形 -->
+        <rect x="4" y="20" width="10" height="7" rx="2"/>
+        <rect x="4" y="20" width="6" height="18" rx="2"/>
+        <!-- 右臂：长方形 -->
+        <rect x="26" y="28" width="10" height="7" rx="2"/>
+        <rect x="30" y="28" width="6" height="16" rx="2"/>
+        <!-- 刺：短线 -->
+        <line x1="17" y1="14" x2="17" y2="17"/>
+        <line x1="23" y1="22" x2="23" y2="25"/>
+        <line x1="18" y1="34" x2="18" y2="37"/>
+        <line x1="22" y1="44" x2="22" y2="47"/>
       </svg>
     </div>
-    <!-- Minecraft风格方块猫（等距3D增强版） -->
+    <!-- 小猫（黑白简笔画，基本几何图形） -->
     <div class="cat">
-      <svg viewBox="0 0 140 110" fill="none">
-        <!-- 地面阴影 -->
-        <ellipse cx="72" cy="102" rx="48" ry="5" fill="#000" opacity="0.12"/>
-        <!-- 尾巴 -->
+      <svg viewBox="0 0 120 90" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 尾巴：长方形（倾斜） -->
         <g class="cat-tail">
-          <polygon points="16,62 8,30 18,28 26,60" fill="#ffa726"/>
-          <polygon points="16,62 26,60 28,66 18,68" fill="#e65100"/>
-          <polygon points="8,30 18,28 20,34 10,36" fill="#ffb74d"/>
+          <rect x="8" y="34" width="22" height="6" rx="2" transform="rotate(-18 19 37)"/>
         </g>
-        <!-- 身体顶面 -->
-        <polygon points="24,50 92,42 100,54 30,62" fill="#ffa726"/>
-        <!-- 身体正面 -->
-        <polygon points="30,62 100,54 100,76 30,82" fill="#fb8c00"/>
-        <!-- 身体侧面 -->
-        <polygon points="24,50 30,62 30,82 22,72" fill="#e65100"/>
-        <!-- 虎斑花纹 -->
-        <rect x="42" y="56" width="5" height="18" fill="#e65100" opacity="0.35"/>
-        <rect x="58" y="54" width="5" height="20" fill="#e65100" opacity="0.35"/>
-        <rect x="74" y="52" width="5" height="18" fill="#e65100" opacity="0.35"/>
-        <!-- 头顶面 -->
-        <polygon points="90,32 116,30 122,44 96,46" fill="#ffa726"/>
-        <!-- 头正面 -->
-        <polygon points="96,46 122,44 122,68 96,70" fill="#ffcc80"/>
-        <!-- 头侧面 -->
-        <polygon points="90,32 96,46 96,70 90,56" fill="#fb8c00"/>
-        <!-- 耳朵 -->
-        <polygon points="94,32 98,16 104,32" fill="#fb8c00"/>
-        <polygon points="94,32 98,16 100,32" fill="#ffa726"/>
-        <polygon points="106,30 110,14 116,30" fill="#fb8c00"/>
-        <polygon points="106,30 110,14 112,30" fill="#ffa726"/>
-        <!-- 耳朵内侧 -->
-        <polygon points="97,28 99,20 101,28" fill="#f8bbd0"/>
-        <polygon points="109,26 111,18 113,26" fill="#f8bbd0"/>
-        <!-- 眼睛 -->
-        <rect x="102" y="52" width="6" height="6" fill="#1a1a1a"/>
-        <rect x="114" y="52" width="6" height="6" fill="#1a1a1a"/>
-        <rect x="103" y="53" width="2" height="2" fill="#fff"/>
-        <rect x="115" y="53" width="2" height="2" fill="#fff"/>
-        <!-- 鼻子 -->
-        <polygon points="120,60 124,62 120,64" fill="#ec407a"/>
-        <!-- 嘴 -->
-        <path d="M120,64 Q118,68 115,66" stroke="#bf360c" stroke-width="1.5" fill="none"/>
-        <path d="M120,64 Q122,68 125,66" stroke="#bf360c" stroke-width="1.5" fill="none"/>
-        <!-- 胡须 -->
-        <line x1="122" y1="62" x2="134" y2="60" stroke="#bf360c" stroke-width="1"/>
-        <line x1="122" y1="65" x2="134" y2="66" stroke="#bf360c" stroke-width="1"/>
-        <!-- 腿 -->
-        <rect class="leg leg-1" x="34" y="76" width="10" height="22" fill="#fb8c00"/>
-        <rect class="leg leg-2" x="70" y="76" width="10" height="22" fill="#fb8c00"/>
-        <rect class="leg leg-3" x="46" y="76" width="10" height="22" fill="#e65100"/>
-        <rect class="leg leg-4" x="82" y="76" width="10" height="22" fill="#e65100"/>
-        <!-- 脚掌 -->
-        <rect class="paw paw-1" x="32" y="94" width="14" height="6" fill="#bf360c"/>
-        <rect class="paw paw-2" x="68" y="94" width="14" height="6" fill="#bf360c"/>
-        <rect class="paw paw-3" x="44" y="94" width="14" height="6" fill="#8d6e00"/>
-        <rect class="paw paw-4" x="80" y="94" width="14" height="6" fill="#8d6e00"/>
+        <!-- 身体：长方形 -->
+        <rect x="26" y="36" width="52" height="24" rx="5"/>
+        <!-- 头：正方形 -->
+        <rect x="72" y="24" width="26" height="26" rx="4"/>
+        <!-- 耳朵：三角形 -->
+        <polygon points="74,24 78,12 86,24"/>
+        <polygon points="86,24 92,12 98,24"/>
+        <!-- 眼睛：小正方形 -->
+        <rect x="78" y="32" width="4" height="4" fill="#222" stroke="none"/>
+        <rect x="89" y="32" width="4" height="4" fill="#222" stroke="none"/>
+        <!-- 鼻子：小三角形 -->
+        <polygon points="94,39 98,41 94,43" fill="#222" stroke="none"/>
+        <!-- 嘴：线条 -->
+        <line x1="94" y1="43" x2="91" y2="47"/>
+        <line x1="94" y1="43" x2="97" y2="47"/>
+        <!-- 胡须：线条 -->
+        <line x1="98" y1="41" x2="108" y2="39"/>
+        <line x1="98" y1="44" x2="108" y2="46"/>
+        <!-- 腿：长方形（4条） -->
+        <rect class="leg leg-1" x="32" y="58" width="8" height="20" rx="2"/>
+        <rect class="leg leg-2" x="60" y="58" width="8" height="20" rx="2"/>
+        <rect class="leg leg-3" x="42" y="58" width="8" height="20" rx="2"/>
+        <rect class="leg leg-4" x="70" y="58" width="8" height="20" rx="2"/>
       </svg>
     </div>
   </div>
