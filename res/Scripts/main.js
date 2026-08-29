@@ -2,48 +2,12 @@
    主页主逻辑：初始化、页面跳转过渡、操作按钮、加载页控制
    ============================================================ */
 
-/* ===== 加载页提示文字轮播 ===== */
-var tipTimer = null;
-(function() {
-  var tipEl = document.getElementById("loadingTip");
-  var isFirstVisit = !localStorage.getItem("blog_visited");
-  var tipIndex = 0;
-  var firstVisitTips = [
-    "首次加载较慢，正在缓存资源...",
-    "小猫正在努力奔跑...",
-    "正在加载图片资源...",
-    "即将完成，请稍候..."
-  ];
-  var normalTips = [
-    "正在加载...",
-    "正在校验资源版本...",
-    "马上就好..."
-  ];
-  var tips = isFirstVisit ? firstVisitTips : normalTips;
-  if (tipEl) tipEl.textContent = tips[0];
-  function switchTip() {
-    if (!tipEl) return;
-    tipEl.style.opacity = "0";
-    setTimeout(function() {
-      tipIndex = (tipIndex + 1) % tips.length;
-      tipEl.textContent = tips[tipIndex];
-      tipEl.style.opacity = "1";
-    }, 300);
-  }
-  tipTimer = setInterval(switchTip, 2500);
-})();
-
-function stopTipSwitch() {
-  if (tipTimer) { clearInterval(tipTimer); tipTimer = null; }
-}
-
 /* ===== 页面初始化 + 资源加载完成检测 ===== */
 document.addEventListener("DOMContentLoaded", async function() {
   document.body.classList.add("page-enter");
-  // 启动星座绘制循环
   // 注入 SVG 图标
   await injectIcons();
-  // 初始化各模块（动态创建文章卡片和图片）
+  // 初始化各模块
   initCarousels();
   initMusic();
   renderTags();
@@ -52,16 +16,11 @@ document.addEventListener("DOMContentLoaded", async function() {
   await waitForAllImages();
   // 标记已访问
   localStorage.setItem("blog_visited", "1");
-  // 停止提示切换和星座动画
-  stopTipSwitch();
-  if (window.stopConstellationCanvas) window.stopConstellationCanvas();
-  var tipEl = document.getElementById("loadingTip");
-  if (tipEl) tipEl.textContent = "加载完成";
   // 延迟淡出加载页
   setTimeout(function() {
     var loadingScreen = document.getElementById("loadingScreen");
     if (loadingScreen) loadingScreen.classList.add("hidden");
-  }, 400);
+  }, 300);
 });
 
 /* 等待页面所有 img 元素加载完成 */
