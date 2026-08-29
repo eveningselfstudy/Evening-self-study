@@ -120,7 +120,7 @@
   display: flex;
   flex-direction: column;
 }
-.large-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.large-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
 .large-article-title {
   font-family: "Noto Serif SC", serif;
   font-size: 17px;
@@ -164,7 +164,7 @@
   flex-direction: column;
   justify-content: center;
 }
-.wide-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+.wide-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; display: flex; align-items: center; gap: 4px; }
 .wide-article-title {
   font-family: "Noto Serif SC", serif;
   font-size: 15px;
@@ -203,7 +203,7 @@
 }
 .small-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .small-article-body { padding: 10px 14px 6px; flex: 1; }
-.small-article-date { font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; }
+.small-article-date { font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
 .small-article-title {
   font-family: "Noto Serif SC", serif;
   font-size: 13.5px;
