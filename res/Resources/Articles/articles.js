@@ -17,7 +17,7 @@ const articles = [
     excerpt: "已知函数 f(x)=2a^x-ex²，通过换元与图像分析，推导双极值点条件下参数 a 的取值范围。",
     cover: "",
     tags: ["数学", "导数", "极值", "函数"],
-    url: "#"
+    url: "https://www.kdocs.cn/l/cnuFStaqc8R2"
   }
 ];
 
