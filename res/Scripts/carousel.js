@@ -14,7 +14,7 @@ function largeArticleHTML(a) {
   return `<div class="block-slide">
     <article class="large-article" onclick="window.location.href='${a.url}'">
       <div class="large-article-cover">
-        ${a.cover ? `<img src="${a.cover}" alt="${a.title}" loading="lazy">` : ''}
+        ${a.cover ? `<img src="Resources/Articles/${a.cover}" alt="${a.title}" loading="lazy">` : ''}
         <span class="large-article-badge">LATEST INSIGHT</span>
       </div>
       <div class="large-article-body">
@@ -29,7 +29,7 @@ function largeArticleHTML(a) {
 function wideArticleHTML(a) {
   return `<div class="block-slide">
     <article class="wide-article" onclick="window.location.href='${a.url}'">
-      <div class="wide-article-cover">${a.cover ? `<img src="${a.cover}" alt="${a.title}" loading="lazy">` : ''}</div>
+      <div class="wide-article-cover">${a.cover ? `<img src="Resources/Articles/${a.cover}" alt="${a.title}" loading="lazy">` : ''}</div>
       <div class="wide-article-body">
         <div class="wide-article-date"><svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>${a.date}</div>
         <h3 class="wide-article-title">${a.title}</h3>
@@ -42,7 +42,7 @@ function wideArticleHTML(a) {
 function smallArticleHTML(a) {
   return `<div class="block-slide">
     <article class="small-article" onclick="window.location.href='${a.url}'">
-      <div class="small-article-cover">${a.cover ? `<img src="${a.cover}" alt="${a.title}" loading="lazy">` : ''}</div>
+      <div class="small-article-cover">${a.cover ? `<img src="Resources/Articles/${a.cover}" alt="${a.title}" loading="lazy">` : ''}</div>
       <div class="small-article-body">
         <div class="small-article-date"><svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>${a.date}</div>
         <h3 class="small-article-title">${a.title}</h3>
