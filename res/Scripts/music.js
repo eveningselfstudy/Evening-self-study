@@ -1,105 +1,175 @@
 /* ============================================================
-   音乐播放器
+   音乐播放器 —— 真实音频播放
    数据来源：Resources/Music/playlist.js
-   时长由代码自动生成（通过 Audio API 或模拟）
+   音乐文件放在 Resources/Music/ 目录下
    ============================================================ */
 let musicPlaying = false;
 let musicIndex = 0;
-let musicProgress = 35; // 百分比
-let musicTimer = null;
 let audioEl = null;
 
+/* ===== 初始化 ===== */
+function initMusic() {
+  audioEl = new Audio();
+  audioEl.preload = "metadata";
+
+  /* 音频事件 */
+  audioEl.addEventListener("timeupdate", updateProgressUI);
+  audioEl.addEventListener("loadedmetadata", onLoadedMetadata);
+  audioEl.addEventListener("ended", onMusicEnded);
+  audioEl.addEventListener("error", onMusicError);
+
+  applyMusic();
+}
+
+/* ===== 播放/暂停 ===== */
 function togglePlay() {
-  musicPlaying = !musicPlaying;
-  const iconContainer = document.getElementById("musicPlayIcon");
-  const cover = document.getElementById("musicCover");
+  var song = playlist[musicIndex];
+  if (!audioEl || !song.file) {
+    showMusicTip("请先添加音乐文件");
+    return;
+  }
 
   if (musicPlaying) {
-    // 替换为暂停图标
+    audioEl.pause();
+    musicPlaying = false;
+    updatePlayIcon(false);
+  } else {
+    audioEl.play().then(function() {
+      musicPlaying = true;
+      updatePlayIcon(true);
+    }).catch(function(e) {
+      showMusicTip("播放失败");
+    });
+  }
+}
+
+/* ===== 更新播放按钮图标 ===== */
+function updatePlayIcon(playing) {
+  var iconContainer = document.getElementById("musicPlayIcon");
+  var cover = document.getElementById("musicCover");
+  if (!iconContainer) return;
+  if (playing) {
     iconContainer.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-    cover.classList.add("playing");
-    startProgress();
+    if (cover) cover.classList.add("playing");
   } else {
     iconContainer.innerHTML = '<path d="M8 5v14l11-7z"/>';
-    cover.classList.remove("playing");
-    stopProgress();
+    if (cover) cover.classList.remove("playing");
   }
 }
 
-function startProgress() {
-  stopProgress();
-  musicTimer = setInterval(() => {
-    musicProgress += 0.5;
-    if (musicProgress >= 100) {
-      musicProgress = 0;
-      nextMusic();
-    }
-    updateProgressUI();
-  }, 500);
-}
-
-function stopProgress() {
-  if (musicTimer) {
-    clearInterval(musicTimer);
-    musicTimer = null;
-  }
-}
-
+/* ===== 更新进度条 ===== */
 function updateProgressUI() {
-  document.getElementById("musicProgressBar").style.width = musicProgress + "%";
-  const song = playlist[musicIndex];
-  // 时长由代码生成：如果有真实音频文件用 audio.duration，否则用模拟值
-  const totalSec = song._duration || 176; // 默认模拟 2:56
-  const curSec = Math.floor(totalSec * musicProgress / 100);
-  document.getElementById("musicCurrent").textContent = formatTime(curSec);
+  if (!audioEl) return;
+  var cur = audioEl.currentTime || 0;
+  var dur = audioEl.duration || 0;
+  var percent = dur > 0 ? (cur / dur) * 100 : 0;
+  var bar = document.getElementById("musicProgressBar");
+  if (bar) bar.style.width = percent + "%";
+  var curEl = document.getElementById("musicCurrent");
+  if (curEl) curEl.textContent = formatTime(cur);
 }
 
+/* ===== 元数据加载完成 ===== */
+function onLoadedMetadata() {
+  if (audioEl.duration) {
+    var totalEl = document.getElementById("musicTotal");
+    if (totalEl) totalEl.textContent = formatTime(audioEl.duration);
+  }
+}
+
+/* ===== 播放结束自动下一首 ===== */
+function onMusicEnded() {
+  nextMusic();
+}
+
+/* ===== 播放错误 ===== */
+function onMusicError() {
+  showMusicTip("音乐加载失败");
+  musicPlaying = false;
+  updatePlayIcon(false);
+}
+
+/* ===== 临时提示 ===== */
+function showMusicTip(msg) {
+  var titleEl = document.getElementById("musicTitle");
+  if (!titleEl) return;
+  var original = titleEl.textContent;
+  titleEl.textContent = msg;
+  setTimeout(function() {
+    if (playlist[musicIndex]) titleEl.textContent = playlist[musicIndex].title;
+  }, 2000);
+}
+
+/* ===== 时间格式化 ===== */
 function formatTime(sec) {
-  const m = Math.floor(sec / 60).toString().padStart(2, "0");
-  const s = (sec % 60).toString().padStart(2, "0");
+  sec = Math.floor(sec || 0);
+  var m = Math.floor(sec / 60).toString().padStart(2, "0");
+  var s = (sec % 60).toString().padStart(2, "0");
   return m + ":" + s;
 }
 
+/* ===== 上一首 ===== */
 function prevMusic() {
   musicIndex = (musicIndex - 1 + playlist.length) % playlist.length;
+  var wasPlaying = musicPlaying;
   applyMusic();
+  if (wasPlaying && audioEl && playlist[musicIndex].file) {
+    audioEl.play().catch(function(){});
+  }
 }
 
+/* ===== 下一首 ===== */
 function nextMusic() {
   musicIndex = (musicIndex + 1) % playlist.length;
+  var wasPlaying = musicPlaying;
   applyMusic();
-}
-
-function applyMusic() {
-  const song = playlist[musicIndex];
-  document.getElementById("musicTitle").textContent = song.title;
-  document.getElementById("musicArtist").textContent = song.artist;
-  // 总时长由代码生成
-  const totalSec = song._duration || 176;
-  document.getElementById("musicTotal").textContent = formatTime(totalSec);
-  // 封面
-  const coverImg = document.getElementById("musicCoverImg");
-  if (song.cover) {
-    coverImg.src = song.cover;
-    coverImg.style.display = "block";
+  if (wasPlaying && audioEl && playlist[musicIndex].file) {
+    audioEl.play().catch(function(){});
   }
-  musicProgress = 0;
-  updateProgressUI();
 }
 
-function seekMusic(e) {
-  const bar = document.getElementById("musicProgress");
-  const r = bar.getBoundingClientRect();
-  musicProgress = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
-  updateProgressUI();
-}
+/* ===== 应用当前歌曲 ===== */
+function applyMusic() {
+  var song = playlist[musicIndex];
+  if (!song) return;
 
-function initMusic() {
-  // 为每首歌生成模拟时长（120~300秒）
-  playlist.forEach((song, i) => {
-    if (!song._duration) {
-      song._duration = 120 + (i * 37) % 180;
+  var titleEl = document.getElementById("musicTitle");
+  var artistEl = document.getElementById("musicArtist");
+  if (titleEl) titleEl.textContent = song.title || "未知歌曲";
+  if (artistEl) artistEl.textContent = song.artist || "未知歌手";
+
+  /* 封面 */
+  var coverImg = document.getElementById("musicCoverImg");
+  if (coverImg) {
+    if (song.cover) {
+      coverImg.src = "Resources/Music/" + song.cover;
+      coverImg.style.display = "block";
+    } else {
+      coverImg.style.display = "none";
     }
-  });
-  applyMusic();
+  }
+
+  /* 加载音频 */
+  if (audioEl && song.file) {
+    audioEl.src = "Resources/Music/" + song.file;
+    audioEl.load();
+  }
+
+  /* 重置进度 */
+  var bar = document.getElementById("musicProgressBar");
+  if (bar) bar.style.width = "0%";
+  var curEl = document.getElementById("musicCurrent");
+  if (curEl) curEl.textContent = "00:00";
+  var totalEl = document.getElementById("musicTotal");
+  if (totalEl) totalEl.textContent = "00:00";
+}
+
+/* ===== 进度条点击跳转 ===== */
+function seekMusic(e) {
+  if (!audioEl || !audioEl.duration) return;
+  var bar = document.getElementById("musicProgress");
+  if (!bar) return;
+  var r = bar.getBoundingClientRect();
+  var percent = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+  audioEl.currentTime = percent * audioEl.duration;
 }
