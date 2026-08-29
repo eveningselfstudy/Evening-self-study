@@ -24,9 +24,15 @@
 
 <!-- ===== 加载页面 ===== -->
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-content">
-    <div class="loading-spinner"></div>
-    <div class="loading-label" id="loadingLabel">加载中</div>
+  <canvas id="constellationCanvas"></canvas>
+  <div class="loading-info">
+    <div class="constellation-name-cn" id="constellationNameCN">大熊座</div>
+    <div class="constellation-name-en" id="constellationName">URSA MAJOR</div>
+    <div class="constellation-fact" id="constellationFact"></div>
+    <div class="loading-row">
+      <span class="loading-text" id="loadingText">加载中</span>
+      <span class="loading-dots"><span></span><span></span><span></span></span>
+    </div>
   </div>
 </div>
 <!-- 背景层 -->
@@ -171,6 +177,7 @@
 
 <!-- ===== 功能脚本 ===== -->
 <script src="Scripts/icon-loader.js"></script>
+<script src="Scripts/constellation-canvas.js"></script>
 <script src="Scripts/carousel.js"></script>
 <script src="Scripts/music.js"></script>
 <script src="Scripts/search.js"></script>
