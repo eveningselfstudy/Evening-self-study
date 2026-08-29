@@ -1,0 +1,299 @@
+/* ============================================================
+   搜索视图 —— 完整动画系统（CSS @keyframes 驱动）
+   ============================================================ */
+.search-view {
+  position: absolute;
+  inset: 0;
+  padding: 32px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+.search-view.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 搜索头部：返回按钮 + 搜索框 */
+.search-header {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* 返回按钮 —— 圆形，搜索框左边，转圈出现 */
+.search-back-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: var(--card-bg-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  padding: 0;
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.5);
+}
+.search-view.visible .search-back-btn {
+  animation: backBtnIn 0.55s var(--ease-out) 0.05s forwards;
+}
+@keyframes backBtnIn {
+  0% { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+  100% { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+.search-back-btn:hover { color: var(--accent); }
+.search-back-btn svg { width: 20px; height: 20px; }
+
+/* 搜索框 —— 从左到右延伸出现 */
+.search-bar-wrap {
+  flex: 1;
+  overflow: hidden;
+}
+.search-bar {
+  width: 0;
+  position: relative;
+  opacity: 0;
+}
+.search-view.visible .search-bar {
+  animation: searchBarExpand 0.6s var(--ease-out) 0.1s forwards;
+}
+@keyframes searchBarExpand {
+  0% { width: 0; opacity: 0; }
+  25% { opacity: 1; }
+  100% { width: 100%; opacity: 1; }
+}
+.search-bar input {
+  width: 100%;
+  padding: 13px 18px 13px 46px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  background: var(--card-bg-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--text-primary);
+  outline: none;
+  box-shadow: var(--shadow-soft);
+}
+.search-bar input:focus {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.12), var(--shadow-soft);
+}
+.search-bar input::placeholder { color: var(--text-muted); }
+.search-bar .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 19px;
+  height: 19px;
+  color: var(--text-muted);
+}
+
+/* 标签栏 —— 从搜索框底部向下移动出现 */
+.tag-scroll-wrap {
+  width: 100%;
+  max-width: 700px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(-18px);
+}
+.tag-scroll-wrap::-webkit-scrollbar { display: none; }
+.search-view.visible .tag-scroll-wrap {
+  animation: tagSlideDown 0.5s var(--ease-out) 0.7s forwards;
+}
+@keyframes tagSlideDown {
+  to { opacity: 1; transform: translateY(0); }
+}
+.tag-scroll {
+  display: flex;
+  gap: 8px;
+  padding: 2px 6px;
+  min-width: max-content;
+  justify-content: center;
+}
+.tag-btn {
+  flex-shrink: 0;
+  padding: 6px 16px;
+  border: 1px solid rgba(244, 114, 182, 0.3);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tag-btn:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+  background: rgba(255,255,255,0.8);
+}
+.tag-btn.active {
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+}
+
+/* 时间线容器 */
+.timeline-container {
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+  padding: 10px 0 40px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* 中轴线 —— 从中间双向延伸，延伸到底部 */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2.5px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--accent-soft), var(--accent-2));
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+.search-view.visible .timeline-line {
+  animation: lineExpandBoth 0.65s var(--ease-out) 1.15s forwards;
+}
+@keyframes lineExpandBoth {
+  0% { top: 50%; height: 0; }
+  100% { top: 0; height: 100%; }
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 12px 36px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.timeline-item:nth-child(odd) { left: 0; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+/* 时间线节点 —— 渐变实心，圆心不在线上（偏移到卡片一侧） */
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent-2));
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.7), 0 2px 8px rgba(236,72,153,0.3);
+  z-index: 2;
+  transform: scale(0);
+}
+.timeline-item:nth-child(odd)::after { right: 10px; }
+.timeline-item:nth-child(even)::after { left: 10px; }
+
+.search-view.visible .timeline-item {
+  animation: timelineItemIn 0.5s var(--ease-out) forwards;
+}
+.search-view.visible .timeline-item::after {
+  animation: dotPop 0.4s var(--ease-out) var(--dot-delay, 1.3s) forwards;
+}
+@keyframes timelineItemIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dotPop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* 时间线文章卡片 */
+.timeline-article {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: inline-block;
+  text-align: left;
+  max-width: 100%;
+  width: 100%;
+}
+.timeline-article:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.timeline-article-cover {
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(135deg, #fbcfe8, #d8b4fe);
+  overflow: hidden;
+}
+.timeline-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.timeline-article-body { padding: 14px 16px 16px; }
+.timeline-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.timeline-article-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.timeline-article-excerpt {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.timeline-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.timeline-article-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(244, 114, 182, 0.1);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-muted);
+  width: 100%;
+}
+.empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.4; }
