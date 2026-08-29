@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设置 · 我的博客</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+<!-- 全局样式 -->
+<link rel="stylesheet" href="PageStyle/Global/variables.css">
+<link rel="stylesheet" href="PageStyle/Global/reset.css">
+<link rel="stylesheet" href="PageStyle/Global/layout.css">
+<!-- 设置页样式 -->
+<link rel="stylesheet" href="PageStyle/Settings/settings.css">
+<!-- 响应式 -->
+<link rel="stylesheet" href="PageStyle/Global/responsive.css">
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-layer"></div>
+<div class="bg-overlay"></div>
+
+<div class="settings-page">
+  <div class="settings-header">
+    <button class="settings-back-btn" onclick="goBack()" aria-label="返回">
+      <span data-icon="back"></span>
+    </button>
+    <h1 class="settings-title">设置</h1>
+  </div>
+
+  <!-- 配色方案 -->
+  <div class="settings-card">
+    <div class="settings-section-title">
+      <span data-icon="settings"></span>
+      浏览器配色
+    </div>
+    <div class="theme-grid" id="themeGrid"></div>
+  </div>
+</div>
+
+<!-- 主题（最先加载） -->
+<script src="Scripts/theme.js"></script>
+<script src="Scripts/icon-loader.js"></script>
+<script src="Scripts/settings.js"></script>
+
+</body>
+</html>

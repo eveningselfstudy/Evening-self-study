@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的博客 · 主页</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+<!-- ===== 全局样式 ===== -->
+<link rel="stylesheet" href="PageStyle/Global/variables.css">
+<link rel="stylesheet" href="PageStyle/Global/reset.css">
+<link rel="stylesheet" href="PageStyle/Global/layout.css">
+
+<!-- ===== 各区域样式 ===== -->
+<link rel="stylesheet" href="PageStyle/ProfileCard/profile.css">
+<link rel="stylesheet" href="PageStyle/MusicPlayer/music.css">
+<link rel="stylesheet" href="PageStyle/ArticleBlocks/blocks.css">
+<link rel="stylesheet" href="PageStyle/SearchView/search.css">
+
+<!-- ===== 响应式 ===== -->
+<link rel="stylesheet" href="PageStyle/Global/responsive.css">
+</head>
+<body>
+
+<!-- 背景层 -->
+<div class="bg-layer"></div>
+<div class="bg-overlay"></div>
+
+<div class="app">
+
+  <!-- ==================== 主视图 ==================== -->
+  <div class="main-view" id="mainView">
+
+    <div class="top-row">
+      <!-- 个人信息卡片 -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img src="Resources/Avatar/avatar.jpg" alt="头像" id="avatarImg">
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">晚自习</div>
+            <div class="profile-bio">一个普通人～</div>
+          </div>
+        </div>
+        <!-- 底部按钮区：更多在左，设置/GitHub/文档在右 -->
+        <div class="profile-footer">
+          <button class="more-btn-inline" onclick="toggleSearch()" aria-label="更多">
+            <span data-icon="more"></span>
+            更多
+          </button>
+          <div class="profile-actions-right">
+            <button class="action-btn" onclick="handleAction('settings')" title="设置" aria-label="设置">
+              <span data-icon="settings"></span>
+            </button>
+            <button class="action-btn" onclick="handleAction('github')" title="GitHub 仓库" aria-label="GitHub 仓库">
+              <span data-icon="github"></span>
+            </button>
+            <button class="action-btn" onclick="handleAction('docs')" title="开发文档" aria-label="开发文档">
+              <span data-icon="docs"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 音乐播放器（无左上角标签） -->
+      <div class="music-card">
+        <div class="music-header">
+          <div class="music-cover" id="musicCover">
+            <img src="" alt="专辑封面" id="musicCoverImg">
+          </div>
+          <div class="music-info">
+            <div class="music-title" id="musicTitle">天上飞琼</div>
+            <div class="music-artist" id="musicArtist">兰音Reine</div>
+          </div>
+        </div>
+        <div class="music-progress-wrap">
+          <span id="musicCurrent">00:52</span>
+          <div class="music-progress" id="musicProgress" onclick="seekMusic(event)">
+            <div class="music-progress-bar" id="musicProgressBar"></div>
+          </div>
+          <span id="musicTotal">02:56</span>
+        </div>
+        <div class="music-controls">
+          <button class="music-ctrl-btn" onclick="prevMusic()" aria-label="上一首">
+            <span data-icon="prev"></span>
+          </button>
+          <button class="music-ctrl-btn music-play-btn" id="musicPlayBtn" onclick="togglePlay()" aria-label="播放/暂停">
+            <svg id="musicPlayIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="music-ctrl-btn" onclick="nextMusic()" aria-label="下一首">
+            <span data-icon="next"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 文章板块网格 -->
+    <div class="articles-grid">
+      <div class="article-block block-large" data-carousel="large">
+        <div class="block-viewport">
+          <div class="block-track"></div>
+          <button class="block-page-btn prev" onclick="blockPrev('large')" aria-label="上一篇">&#10094;</button>
+          <button class="block-page-btn next" onclick="blockNext('large')" aria-label="下一篇">&#10095;</button>
+        </div>
+        <div class="block-dots"></div>
+      </div>
+
+      <div class="article-block block-wide" data-carousel="wide">
+        <div class="block-viewport">
+          <div class="block-track"></div>
+          <button class="block-page-btn prev" onclick="blockPrev('wide')" aria-label="上一篇">&#10094;</button>
+          <button class="block-page-btn next" onclick="blockNext('wide')" aria-label="下一篇">&#10095;</button>
+        </div>
+        <div class="block-dots"></div>
+      </div>
+
+      <div class="article-block block-small" data-carousel="small">
+        <div class="block-viewport">
+          <div class="block-track"></div>
+          <button class="block-page-btn prev" onclick="blockPrev('small')" aria-label="上一篇">&#10094;</button>
+          <button class="block-page-btn next" onclick="blockNext('small')" aria-label="下一篇">&#10095;</button>
+        </div>
+        <div class="block-dots"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== 搜索视图 ==================== -->
+  <div class="search-view" id="searchView">
+    <div class="search-header">
+      <button class="search-back-btn" onclick="toggleSearch()" aria-label="返回">
+        <span data-icon="back"></span>
+      </button>
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <span class="search-icon" data-icon="search"></span>
+          <input type="text" id="searchInput" placeholder="搜寻标题、描述或标签..." oninput="renderTimeline()">
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-scroll-wrap">
+      <div class="tag-scroll" id="tagScroll"></div>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div id="timelineContent"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 主题（最先加载，避免闪烁） ===== -->
+<script src="Scripts/theme.js"></script>
+
+<!-- ===== 数据对象 ===== -->
+<script src="Resources/Articles/articles.js"></script>
+<script src="Resources/Music/playlist.js"></script>
+<script src="Resources/Preview/preview.js"></script>
+
+<!-- ===== 功能脚本 ===== -->
+<script src="Scripts/icon-loader.js"></script>
+<script src="Scripts/carousel.js"></script>
+<script src="Scripts/music.js"></script>
+<script src="Scripts/search.js"></script>
+<script src="Scripts/main.js"></script>
+
+</body>
+</html>
