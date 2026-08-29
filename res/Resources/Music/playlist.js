@@ -9,21 +9,9 @@
    ============================================================ */
 const playlist = [
   {
-    title: "歌曲1",
-    artist: "",
-    cover: "",
-    file: ""
-  },
-  {
-    title: "歌曲2",
-    artist: "",
-    cover: "",
-    file: ""
-  },
-  {
-    title: "歌曲3",
-    artist: "",
-    cover: "",
-    file: ""
+    title: "写故事的人",
+    artist: "汪苏泷",
+    cover: "1.jpg",
+    file: "1.mp3"
   }
 ];
