@@ -63,10 +63,16 @@ function initCarousels() {
 
     track.innerHTML = list.map(renderers[key]).join("");
 
-    // 小白点数量 <=1 时隐藏
+    // 小白点和左右箭头：数量 <=1 时隐藏
+    var prevBtn = block.querySelector(".block-page-btn.prev");
+    var nextBtn = block.querySelector(".block-page-btn.next");
     if (list.length <= 1) {
       dots.classList.add("hidden");
+      if (prevBtn) prevBtn.style.display = "none";
+      if (nextBtn) nextBtn.style.display = "none";
     } else {
+      if (prevBtn) prevBtn.style.display = "";
+      if (nextBtn) nextBtn.style.display = "";
       dots.classList.remove("hidden");
       dots.innerHTML = list.map((_, i) =>
         `<button class="block-dot ${i === 0 ? 'active' : ''}" onclick="goToBlock('${key}',${i})" aria-label="第${i+1}篇"></button>`
