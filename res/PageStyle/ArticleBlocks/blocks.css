@@ -1,0 +1,217 @@
+/* ============================================================
+   文章板块网格（大/宽/小 三个轮播板块）
+   ============================================================ */
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+.article-block {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.block-large { grid-column: 1; grid-row: 1 / 3; }
+.block-wide { grid-column: 2; grid-row: 1; }
+.block-small { grid-column: 2; grid-row: 2; }
+
+/* 轮播视口 */
+.block-viewport {
+  overflow: hidden;
+  flex: 1;
+  position: relative;
+}
+.block-track {
+  display: flex;
+  transition: transform 0.45s var(--ease-out);
+  height: 100%;
+}
+.block-slide { flex: 0 0 100%; min-width: 0; }
+
+/* 板块内翻页按钮 〈〉 */
+.block-page-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 22px;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 8px 6px;
+  z-index: 5;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  transition: color 0.2s, transform 0.2s;
+  line-height: 1;
+}
+.block-page-btn:hover {
+  color: #fff;
+  transform: translateY(-50%) scale(1.2);
+}
+.block-page-btn.prev { left: 6px; }
+.block-page-btn.next { right: 6px; }
+
+/* 圆点指示器：蓝点=当前，白点=其他；<=1个时隐藏 */
+.block-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+.block-dots.hidden { display: none; }
+.block-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.7);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.block-dot.active {
+  background: var(--dot-blue);
+  transform: scale(1.15);
+}
+
+/* ---------- 大板块文章 ---------- */
+.large-article {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
+.large-article-cover {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #fbcfe8, #d8b4fe);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.large-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.large-article-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent-2));
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+.large-article-body {
+  padding: 16px 18px 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.large-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.large-article-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.large-article-excerpt {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- 宽板块文章（横向） ---------- */
+.wide-article {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  min-height: 140px;
+  cursor: pointer;
+}
+.wide-article-cover {
+  flex: 0 0 40%;
+  background: linear-gradient(135deg, #fbcfe8, #d8b4fe);
+  overflow: hidden;
+}
+.wide-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wide-article-body {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wide-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+.wide-article-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wide-article-excerpt {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- 小板块文章 ---------- */
+.small-article {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
+.small-article-cover {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(135deg, #fbcfe8, #d8b4fe);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.small-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.small-article-body { padding: 10px 14px 6px; flex: 1; }
+.small-article-date { font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; }
+.small-article-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
