@@ -4,7 +4,7 @@
    选择保存在 localStorage，页面加载时自动应用
    ============================================================ */
 const THEME_KEY = "blog_theme";
-const DEFAULT_THEME = "sakura";
+const DEFAULT_THEME = "ocean";
 
 const THEMES = [
   { id: "sakura",   name: "樱粉" },
