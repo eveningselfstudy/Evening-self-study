@@ -253,7 +253,7 @@
 }
 .timeline-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .timeline-article-body { padding: 14px 16px 16px; }
-.timeline-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.timeline-article-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
 .timeline-article-title {
   font-family: "Noto Serif SC", serif;
   font-size: 15px;
