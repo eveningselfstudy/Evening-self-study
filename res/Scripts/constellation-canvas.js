@@ -352,10 +352,7 @@
 
   /* ===== 绘制背景（浅色治愈系） ===== */
   function drawBackground(t) {
-    var grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, "#ffffff");
-    grad.addColorStop(1, "#fafafa");
-    ctx.fillStyle = grad;
+    ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, W, H);
     bgStars.forEach(function(s) {
       var tw = Math.sin(t * s.twinkleSpeed + s.twinklePhase);
