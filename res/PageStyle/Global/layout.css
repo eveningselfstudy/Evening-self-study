@@ -79,14 +79,13 @@
 }
 .loading-info {
   position: fixed;
-  bottom: 10%;
+  bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   pointer-events: none;
   width: 90%;
   max-width: 420px;
-  z-index: 10;
 }
 .constellation-name-cn {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
