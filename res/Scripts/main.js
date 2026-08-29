@@ -37,10 +37,10 @@ function handleAction(type) {
       openSettings();
       break;
     case 'github':
-      alert('GitHub 仓库 —— 请在 handleAction("github") 中填写仓库地址');
+      window.open("https://github.com/eveningselfstudy/Evening-self-study", "_blank");
       break;
     case 'docs':
-      alert('开发文档 —— 请在 handleAction("docs") 中填写文档地址');
+      window.open("https://www.kdocs.cn/l/csuQCyb2syyah", "_blank");
       break;
   }
 }
