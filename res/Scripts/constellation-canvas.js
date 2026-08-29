@@ -17,7 +17,7 @@
     {
       name: "URSA MAJOR", nameCN: "大熊座",
       desc: "北斗七星 · 全年可见的导航星座",
-      themeColor: [120, 170, 230],
+      themeColor: [30, 30, 30],
       facts: [
         "北斗七星属于大熊座，是北半球最易辨认的星群",
         "勺口两星连线延长5倍，即可找到北极星",
@@ -38,29 +38,29 @@
     {
       name: "ORION", nameCN: "猎户座",
       desc: "冬季之王 · 腰带三星最易辨认",
-      themeColor: [100, 160, 230],
+      themeColor: [30, 30, 30],
       facts: [
         "猎户座是冬季夜空中最壮观的星座，腰带三星连成一线",
         "参宿四是红超巨星，参宿七是蓝超巨星，一红一蓝交相辉映",
         "猎户座大星云M42是肉眼可见的恒星诞生区"
       ],
       stars: [
-        {x:0.3333,y:0.1333,mag:0.5,color:"#ff9944",label:"参宿四"},
+        {x:0.3333,y:0.1333,mag:0.5,color:"#1a1a1a",label:"参宿四"},
         {x:0.6667,y:0.1806,mag:2.0,color:"#ffffff"},
         {x:0.25,y:0.375,mag:2.1,color:"#ffffff"},
-        {x:0.7778,y:0.3611,mag:2.2,color:"#ccd8ff"},
-        {x:0.3889,y:0.4944,mag:2.2,color:"#ccd8ff"},
-        {x:0.5,y:0.4944,mag:2.2,color:"#ccd8ff"},
-        {x:0.6111,y:0.4861,mag:2.2,color:"#ccd8ff"},
+        {x:0.7778,y:0.3611,mag:2.2,color:"#444444"},
+        {x:0.3889,y:0.4944,mag:2.2,color:"#444444"},
+        {x:0.5,y:0.4944,mag:2.2,color:"#444444"},
+        {x:0.6111,y:0.4861,mag:2.2,color:"#444444"},
         {x:0.2917,y:0.8056,mag:2.1,color:"#ffffff"},
-        {x:0.7083,y:0.8194,mag:0.18,color:"#b8d4ff",label:"参宿七"}
+        {x:0.7083,y:0.8194,mag:0.18,color:"#333333",label:"参宿七"}
       ],
       links: [[0,1],[0,2],[1,3],[2,4],[4,5],[5,6],[3,6],[4,7],[6,8]]
     },
     {
       name: "CASSIOPEIA", nameCN: "仙后座",
       desc: "W 形标志 · 北天拱极星座",
-      themeColor: [150, 180, 230],
+      themeColor: [30, 30, 30],
       facts: [
         "仙后座呈W形，是北天最易辨认的星座之一",
         "仙后座与大熊座隔北极星相望，全年可见",
@@ -68,8 +68,8 @@
       ],
       stars: [
         {x:0.125,y:0.4063,mag:2.3,color:"#ffffff",label:"策"},
-        {x:0.3125,y:0.5938,mag:2.2,color:"#fff0dd",label:"王良一"},
-        {x:0.5,y:0.3594,mag:2.5,color:"#ccd8ff"},
+        {x:0.3125,y:0.5938,mag:2.2,color:"#555555",label:"王良一"},
+        {x:0.5,y:0.3594,mag:2.5,color:"#444444"},
         {x:0.6875,y:0.6094,mag:2.7,color:"#ffffff"},
         {x:0.8906,y:0.3906,mag:3.3,color:"#ffffff",label:"阁道二"}
       ],
@@ -78,65 +78,65 @@
     {
       name: "SCORPIUS", nameCN: "天蝎座",
       desc: "夏季之王 · S 形蝎尾极壮观",
-      themeColor: [220, 130, 100],
+      themeColor: [30, 30, 30],
       facts: [
         "天蝎座是夏季夜空中最壮观的星座，S形蝎尾栩栩如生",
         "心宿二是红超巨星，呈现火红色，古称'大火'",
         "天蝎座尾端的毒钩由几颗亮星组成，极为醒目"
       ],
       stars: [
-        {x:0.1563,y:0.1563,mag:2.9,color:"#ccd8ff"},
-        {x:0.2656,y:0.2031,mag:2.6,color:"#ccd8ff"},
-        {x:0.3438,y:0.1406,mag:2.9,color:"#ccd8ff"},
-        {x:0.3125,y:0.2969,mag:0.96,color:"#ff6644",label:"心宿二"},
-        {x:0.3594,y:0.4063,mag:2.8,color:"#aabbcc"},
-        {x:0.375,y:0.5156,mag:2.7,color:"#aabbcc"},
-        {x:0.4375,y:0.6094,mag:2.4,color:"#ccd8ff"},
-        {x:0.5313,y:0.6719,mag:2.7,color:"#aabbcc"},
-        {x:0.6563,y:0.7031,mag:2.4,color:"#ccd8ff"},
-        {x:0.7656,y:0.7656,mag:2.7,color:"#aabbcc"},
-        {x:0.8125,y:0.8594,mag:2.7,color:"#aabbcc"},
-        {x:0.7813,y:0.9375,mag:2.7,color:"#aabbcc"},
-        {x:0.8438,y:0.9063,mag:1.6,color:"#ccd8ff",label:"尾宿"}
+        {x:0.1563,y:0.1563,mag:2.9,color:"#444444"},
+        {x:0.2656,y:0.2031,mag:2.6,color:"#444444"},
+        {x:0.3438,y:0.1406,mag:2.9,color:"#444444"},
+        {x:0.3125,y:0.2969,mag:0.96,color:"#1a1a1a",label:"心宿二"},
+        {x:0.3594,y:0.4063,mag:2.8,color:"#666666"},
+        {x:0.375,y:0.5156,mag:2.7,color:"#666666"},
+        {x:0.4375,y:0.6094,mag:2.4,color:"#444444"},
+        {x:0.5313,y:0.6719,mag:2.7,color:"#666666"},
+        {x:0.6563,y:0.7031,mag:2.4,color:"#444444"},
+        {x:0.7656,y:0.7656,mag:2.7,color:"#666666"},
+        {x:0.8125,y:0.8594,mag:2.7,color:"#666666"},
+        {x:0.7813,y:0.9375,mag:2.7,color:"#666666"},
+        {x:0.8438,y:0.9063,mag:1.6,color:"#444444",label:"尾宿"}
       ],
       links: [[0,1],[1,2],[1,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12]]
     },
     {
       name: "CYGNUS", nameCN: "天鹅座",
       desc: "北十字 · 夏季大三角成员",
-      themeColor: [110, 180, 230],
+      themeColor: [30, 30, 30],
       facts: [
         "天鹅座呈十字形，又称北十字，是夏季大三角成员之一",
         "天津四是全天第19亮星，距离约2600光年",
         "天鹅座位于银河中，是观测星云的好目标"
       ],
       stars: [
-        {x:0.5,y:0.125,mag:1.25,color:"#ffd700",label:"天津四"},
-        {x:0.5,y:0.3438,mag:2.5,color:"#ccd8ff"},
+        {x:0.5,y:0.125,mag:1.25,color:"#1a1a1a",label:"天津四"},
+        {x:0.5,y:0.3438,mag:2.5,color:"#444444"},
         {x:0.5,y:0.5938,mag:2.2,color:"#ffffff"},
-        {x:0.5,y:0.8438,mag:3.0,color:"#aabbcc"},
-        {x:0.1875,y:0.4531,mag:2.5,color:"#ccd8ff"},
-        {x:0.8438,y:0.4375,mag:2.5,color:"#ccd8ff"}
+        {x:0.5,y:0.8438,mag:3.0,color:"#666666"},
+        {x:0.1875,y:0.4531,mag:2.5,color:"#444444"},
+        {x:0.8438,y:0.4375,mag:2.5,color:"#444444"}
       ],
       links: [[0,1],[1,2],[2,3],[4,2],[2,5]]
     },
     {
       name: "TAURUS", nameCN: "金牛座",
       desc: "冬季 · V 形牛脸 · 昴星团",
-      themeColor: [220, 160, 90],
+      themeColor: [30, 30, 30],
       facts: [
         "金牛座V形牛脸由毕星团组成，毕宿五是牛的眼睛",
         "昴星团M45是最著名的疏散星团，肉眼可见六七颗星",
         "金牛座是黄道十二宫第二宫，象征稳重与享受"
       ],
       stars: [
-        {x:0.4643,y:0.5,mag:0.85,color:"#ff9944",label:"毕宿五"},
-        {x:0.3571,y:0.3571,mag:2.9,color:"#aabbcc"},
-        {x:0.6071,y:0.375,mag:2.9,color:"#aabbcc"},
-        {x:0.6071,y:0.5357,mag:3.0,color:"#aabbcc"},
-        {x:0.75,y:0.5536,mag:3.4,color:"#aabbcc"},
-        {x:0.25,y:0.2857,mag:2.8,color:"#ccd8ff"},
-        {x:0.6964,y:0.2679,mag:2.8,color:"#ccd8ff"}
+        {x:0.4643,y:0.5,mag:0.85,color:"#1a1a1a",label:"毕宿五"},
+        {x:0.3571,y:0.3571,mag:2.9,color:"#666666"},
+        {x:0.6071,y:0.375,mag:2.9,color:"#666666"},
+        {x:0.6071,y:0.5357,mag:3.0,color:"#666666"},
+        {x:0.75,y:0.5536,mag:3.4,color:"#666666"},
+        {x:0.25,y:0.2857,mag:2.8,color:"#444444"},
+        {x:0.6964,y:0.2679,mag:2.8,color:"#444444"}
       ],
       links: [[0,1],[0,2],[0,3],[3,4],[1,5],[2,6]],
       cluster: { x:0.8643, y:0.4286, r:0.05, count:8 }
@@ -144,40 +144,152 @@
     {
       name: "LYRA", nameCN: "天琴座",
       desc: "夏季大三角 · 织女星璀璨夺目",
-      themeColor: [180, 210, 240],
+      themeColor: [30, 30, 30],
       facts: [
         "织女星是全天第五亮星，呈蓝白色，曾是北极星",
         "天琴座是夏季大三角成员，与天鹅座、天鹰座相望",
         "天琴座M57环状星云是最著名的行星状星云之一"
       ],
       stars: [
-        {x:0.5,y:0.12,mag:0.03,color:"#fffff0",label:"织女星"},
-        {x:0.35,y:0.42,mag:3.3,color:"#aabbcc"},
-        {x:0.62,y:0.38,mag:3.5,color:"#aabbcc"},
-        {x:0.32,y:0.72,mag:3.2,color:"#aabbcc"},
-        {x:0.65,y:0.68,mag:3.4,color:"#aabbcc"}
+        {x:0.5,y:0.12,mag:0.03,color:"#111111",label:"织女星"},
+        {x:0.35,y:0.42,mag:3.3,color:"#666666"},
+        {x:0.62,y:0.38,mag:3.5,color:"#666666"},
+        {x:0.32,y:0.72,mag:3.2,color:"#666666"},
+        {x:0.65,y:0.68,mag:3.4,color:"#666666"}
       ],
       links: [[0,1],[0,2],[1,2],[1,3],[2,4],[3,4]]
     },
     {
       name: "CRUX", nameCN: "南十字座",
       desc: "面积最小 · 南半球标志星座",
-      themeColor: [140, 190, 240],
+      themeColor: [30, 30, 30],
       facts: [
         "南十字座是全天88星座中面积最小的星座",
         "十字架二是全天第13亮星，呈蓝白色",
         "南十字座是南半球的标志，北半球大部分地区不可见"
       ],
       stars: [
-        {x:0.5,y:0.1875,mag:2.8,color:"#ccd8ff"},
-        {x:0.5,y:0.7188,mag:0.76,color:"#b8d4ff",label:"十字架二"},
-        {x:0.2813,y:0.4531,mag:2.8,color:"#ccd8ff"},
+        {x:0.5,y:0.1875,mag:2.8,color:"#444444"},
+        {x:0.5,y:0.7188,mag:0.76,color:"#333333",label:"十字架二"},
+        {x:0.2813,y:0.4531,mag:2.8,color:"#444444"},
         {x:0.7344,y:0.4375,mag:1.25,color:"#ffffff",label:"十字架三"},
-        {x:0.5469,y:0.4688,mag:3.6,color:"#889999"}
+        {x:0.5469,y:0.4688,mag:3.6,color:"#777777"}
       ],
       links: [[0,1],[2,3]]
+    },
+    {
+      name: "GEMINI", nameCN: "双子座",
+      desc: "黄道第三宫 · 双胞胎并肩而立",
+      themeColor: [30, 30, 30],
+      facts: [
+        "双子座两颗最亮星北河二、北河三代表双胞胎",
+        "双子座流星雨每年12月出现，是年度三大流星雨之一",
+        "北河三是全天第17亮星，呈橙黄色"
+      ],
+      stars: [
+        {x:0.22,y:0.18,mag:1.9,color:"#111111",label:"北河二"},
+        {x:0.22,y:0.48,mag:2.9,color:"#444444"},
+        {x:0.22,y:0.78,mag:3.1,color:"#555555"},
+        {x:0.78,y:0.16,mag:1.14,color:"#111111",label:"北河三"},
+        {x:0.78,y:0.46,mag:2.9,color:"#444444"},
+        {x:0.78,y:0.76,mag:3.2,color:"#555555"},
+        {x:0.5,y:0.32,mag:3.5,color:"#666666"},
+        {x:0.5,y:0.62,mag:3.6,color:"#666666"}
+      ],
+      links: [[0,1],[1,2],[3,4],[4,5],[0,6],[3,6],[1,7],[4,7],[6,7]]
+    },
+    {
+      name: "LEO", nameCN: "狮子座",
+      desc: "黄道第五宫 · 镰刀形雄狮",
+      themeColor: [30, 30, 30],
+      facts: [
+        "狮子座轩辕十四是全天第21亮星，呈蓝白色",
+        "狮子座流星雨每年11月出现，被誉为流星雨之王",
+        "狮子座镰刀形星群是春季夜空最醒目的标志"
+      ],
+      stars: [
+        {x:0.18,y:0.32,mag:2.9,color:"#444444"},
+        {x:0.28,y:0.22,mag:2.5,color:"#333333"},
+        {x:0.42,y:0.26,mag:3.0,color:"#555555"},
+        {x:0.52,y:0.36,mag:2.6,color:"#333333"},
+        {x:0.48,y:0.52,mag:1.35,color:"#111111",label:"轩辕十四"},
+        {x:0.34,y:0.58,mag:2.5,color:"#444444"},
+        {x:0.58,y:0.68,mag:2.4,color:"#333333"},
+        {x:0.72,y:0.62,mag:2.6,color:"#444444"}
+      ],
+      links: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[4,6],[6,7]]
+    },
+    {
+      name: "ANDROMEDA", nameCN: "仙女座",
+      desc: "秋季星座 · 仙女座星系闻名",
+      themeColor: [30, 30, 30],
+      facts: [
+        "仙女座星系M31是离银河系最近的大型旋涡星系",
+        "仙女座α星壁宿二是秋季四边形的顶点之一",
+        "仙女座在希腊神话中是被锁在岩石上的公主"
+      ],
+      stars: [
+        {x:0.12,y:0.32,mag:2.1,color:"#333333"},
+        {x:0.28,y:0.4,mag:2.5,color:"#444444"},
+        {x:0.48,y:0.46,mag:2.0,color:"#111111",label:"壁宿二"},
+        {x:0.68,y:0.4,mag:2.5,color:"#444444"},
+        {x:0.85,y:0.3,mag:2.8,color:"#555555"},
+        {x:0.48,y:0.62,mag:3.0,color:"#555555"},
+        {x:0.62,y:0.72,mag:3.2,color:"#666666"}
+      ],
+      links: [[0,1],[1,2],[2,3],[3,4],[2,5],[5,6]]
+    },
+    {
+      name: "PEGASUS", nameCN: "飞马座",
+      desc: "秋季四边形 · 飞马腾空",
+      themeColor: [30, 30, 30],
+      facts: [
+        "飞马座大四边形是秋季夜空最醒目的标志",
+        "飞马座在希腊神话中是英雄珀尔修斯的坐骑",
+        "飞马座51b是人类发现的第一颗太阳系外行星"
+      ],
+      stars: [
+        {x:0.28,y:0.28,mag:2.4,color:"#333333"},
+        {x:0.72,y:0.26,mag:2.5,color:"#333333"},
+        {x:0.74,y:0.66,mag:2.4,color:"#333333",label:"壁宿一"},
+        {x:0.26,y:0.68,mag:2.8,color:"#444444"},
+        {x:0.1,y:0.52,mag:3.0,color:"#555555"},
+        {x:0.9,y:0.48,mag:3.2,color:"#666666"}
+      ],
+      links: [[0,1],[1,2],[2,3],[3,0],[0,4],[1,5]]
+    },
+    {
+      name: "CAPRICORNUS", nameCN: "摩羯座",
+      desc: "黄道第十宫 · 海山羊",
+      themeColor: [30, 30, 30],
+      facts: [
+        "摩羯座是黄道十二宫第十宫，象征坚韧与野心",
+        "摩羯座形象为海山羊，上身为羊下身为鱼",
+        "摩羯座α星是全天第40亮星，距离约39光年"
+      ],
+      stars: [
+        {x:0.28,y:0.32,mag:3.0,color:"#555555"},
+        {x:0.46,y:0.26,mag:2.9,color:"#444444"},
+        {x:0.62,y:0.36,mag:3.1,color:"#555555"},
+        {x:0.58,y:0.52,mag:2.8,color:"#444444"},
+        {x:0.42,y:0.58,mag:3.0,color:"#555555"},
+        {x:0.28,y:0.52,mag:3.2,color:"#666666"},
+        {x:0.18,y:0.42,mag:3.3,color:"#666666"},
+        {x:0.68,y:0.68,mag:2.9,color:"#444444"},
+        {x:0.78,y:0.78,mag:3.1,color:"#555555"}
+      ],
+      links: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[3,7],[7,8]]
     }
+
   ];
+
+  /* ===== 随机打乱星座顺序 ===== */
+  for (var i = constellations.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = constellations[i];
+    constellations[i] = constellations[j];
+    constellations[j] = tmp;
+  }
 
   /* ===== 初始化画布 ===== */
   function resizeCanvas() {
@@ -195,9 +307,9 @@
   /* ===== 背景星星 ===== */
   function createBgStar() {
     var roll = Math.random();
-    var r = 160, g = 185, b = 220;
-    if (roll < 0.1) { r = 140; g = 170; b = 220; }
-    else if (roll < 0.18) { r = 220; g = 200; b = 170; }
+    var r = 200, g = 200, b = 200;
+    if (roll < 0.15) { r = 180; g = 180; b = 180; }
+    else if (roll < 0.25) { r = 220; g = 220; b = 220; }
     return {
       x: Math.random() * W,
       y: Math.random() * H,
@@ -241,9 +353,8 @@
   /* ===== 绘制背景（浅色治愈系） ===== */
   function drawBackground(t) {
     var grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, "#f5f8ff");
-    grad.addColorStop(0.5, "#eef3fc");
-    grad.addColorStop(1, "#e8eef8");
+    grad.addColorStop(0, "#ffffff");
+    grad.addColorStop(1, "#fafafa");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
     bgStars.forEach(function(s) {
@@ -295,7 +406,7 @@
       if (seg > 0 && seg < 1) {
         ctx.beginPath();
         ctx.arc(curX, curY, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(200,220,255," + alpha + ")";
+        ctx.fillStyle = "rgba(30,30,30," + alpha + ")";
         ctx.fill();
         ctx.beginPath();
         ctx.arc(curX, curY, 7, 0, Math.PI * 2);
@@ -317,7 +428,7 @@
         var sy = cp.y + Math.sin(angle) * dist;
         ctx.beginPath();
         ctx.arc(sx, sy, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(160,180,220," + 0.5 * ca + ")";
+        ctx.fillStyle = "rgba(120,120,120," + 0.5 * ca + ")";
         ctx.fill();
       }
     }
