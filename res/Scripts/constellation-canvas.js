@@ -323,55 +323,89 @@
       ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
       ctx.fill();
 
-      /* 星名标签：放在星座外侧，避免与连线重合 */
+      /* 星名标签：放在星座外侧 + 白色背景框，确保不被连线遮挡 */
       if (showLabels && star.label && labelAlpha > 0) {
         ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
-        ctx.fillStyle = "rgba(0,0,0," + (0.65 * alpha * labelAlpha) + ")";
         /* 计算从中心到该星的方向，标签放在远离中心的一侧 */
         var dx = star.x - cx;
         var dy = star.y - cy;
         var labelX, labelY, align;
+        var padX = 5, padY = 3;
+        var gap = 30; /* 标签与星星的距离（侧边） */
         if (Math.abs(dy) > Math.abs(dx)) {
-          /* 垂直方向为主：标签在上或下 */
           if (dy < 0) {
-            /* 星在中心上方，标签放更上方 */
             labelX = pos.x;
-            labelY = pos.y - size - 8;
+            labelY = pos.y - gap;
             align = "center";
           } else {
-            /* 星在中心下方，标签放更下方 */
             labelX = pos.x;
-            labelY = pos.y + size + 12;
+            labelY = pos.y + gap + 10;
             align = "center";
           }
         } else {
-          /* 水平方向为主：标签在左或右 */
           if (dx < 0) {
-            /* 星在中心左侧，标签放更左侧 */
-            labelX = pos.x - size - 8;
+            labelX = pos.x - gap;
             labelY = pos.y + 4;
             align = "right";
           } else {
-            /* 星在中心右侧，标签放更右侧 */
-            labelX = pos.x + size + 8;
+            labelX = pos.x + gap;
             labelY = pos.y + 4;
             align = "left";
           }
         }
-        /* 边界保护：如果标签超出画布，换到另一侧 */
+        /* 边界保护 */
         var textWidth = ctx.measureText(star.label).width;
-        if (align === "left" && labelX + textWidth > W - 10) {
-          labelX = pos.x - size - 8;
+        if (align === "left" && labelX + textWidth + padX > W - 8) {
+          labelX = pos.x - gap;
           align = "right";
-        } else if (align === "right" && labelX - textWidth < 10) {
-          labelX = pos.x + size + 8;
+        } else if (align === "right" && labelX - textWidth - padX < 8) {
+          labelX = pos.x + gap;
           align = "left";
         }
-        if (align === "center" && labelY < 15) {
-          labelY = pos.y + size + 12;
-        } else if (align === "center" && labelY > H - 10) {
-          labelY = pos.y - size - 8;
+        if (align === "center" && labelY - 14 < 8) {
+          labelY = pos.y + gap + 10;
+        } else if (align === "center" && labelY + 4 > H - 8) {
+          labelY = pos.y - gap;
         }
+        /* 绘制虚线连接星星和标签 */
+        var lineEndX, lineEndY;
+        if (align === "center") {
+          lineEndX = labelX;
+          lineEndY = dy < 0 ? labelY + 8 : labelY - 8;
+        } else if (align === "left") {
+          lineEndX = labelX - 2;
+          lineEndY = labelY - 4;
+        } else {
+          lineEndX = labelX + 2;
+          lineEndY = labelY - 4;
+        }
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        ctx.lineTo(lineEndX, lineEndY);
+        ctx.strokeStyle = "rgba(0,0,0," + (0.25 * alpha * labelAlpha) + ")";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* 绘制白色背景框（覆盖可能穿过的连线） */
+        var bgX, bgY, bgW, bgH;
+        bgH = 16;
+        bgW = textWidth + padX * 2;
+        if (align === "center") {
+          bgX = labelX - bgW / 2;
+          bgY = labelY - 12;
+        } else if (align === "left") {
+          bgX = labelX - padX;
+          bgY = labelY - 12;
+        } else {
+          bgX = labelX - textWidth - padX;
+          bgY = labelY - 12;
+        }
+        ctx.fillStyle = "rgba(255,255,255," + (0.92 * alpha * labelAlpha) + ")";
+        ctx.fillRect(bgX, bgY, bgW, bgH);
+        /* 绘制文字 */
+        ctx.fillStyle = "rgba(0,0,0," + (0.85 * alpha * labelAlpha) + ")";
         ctx.textAlign = align;
         ctx.fillText(star.label, labelX, labelY);
       }
