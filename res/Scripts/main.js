@@ -41,7 +41,6 @@ function stopTipSwitch() {
 document.addEventListener("DOMContentLoaded", async function() {
   document.body.classList.add("page-enter");
   // 启动星座绘制循环
-  startConstellationLoop();
   // 注入 SVG 图标
   await injectIcons();
   // 初始化各模块（动态创建文章卡片和图片）
@@ -53,9 +52,9 @@ document.addEventListener("DOMContentLoaded", async function() {
   await waitForAllImages();
   // 标记已访问
   localStorage.setItem("blog_visited", "1");
-  // 停止提示切换和星座循环
+  // 停止提示切换和星座动画
   stopTipSwitch();
-  stopConstellationLoop();
+  if (window.stopConstellationCanvas) window.stopConstellationCanvas();
   var tipEl = document.getElementById("loadingTip");
   if (tipEl) tipEl.textContent = "加载完成";
   // 延迟淡出加载页
