@@ -40,7 +40,7 @@ function handleAction(type) {
       window.open("https://github.com/eveningselfstudy/Evening-self-study", "_blank");
       break;
     case 'docs':
-      window.open("https://www.kdocs.cn/l/csuQCyb2syyah", "_blank");
+      window.open("https://www.kdocs.cn/l/csuQCyb2syya", "_blank");
       break;
   }
 }
