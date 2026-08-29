@@ -24,61 +24,40 @@
 
 <!-- ===== 加载页面 ===== -->
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-scene">
-    <!-- 地面 -->
-    <div class="ground">
-      <div class="ground-line"></div>
-    </div>
-    <!-- 障碍物：仙人掌（黑白简笔画） -->
-    <div class="obstacle">
-      <svg viewBox="0 0 40 60" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 主体：长方形 -->
-        <rect x="14" y="6" width="12" height="48" rx="3"/>
-        <!-- 左臂：长方形 -->
-        <rect x="4" y="20" width="10" height="7" rx="2"/>
-        <rect x="4" y="20" width="6" height="18" rx="2"/>
-        <!-- 右臂：长方形 -->
-        <rect x="26" y="28" width="10" height="7" rx="2"/>
-        <rect x="30" y="28" width="6" height="16" rx="2"/>
-        <!-- 刺：短线 -->
-        <line x1="17" y1="14" x2="17" y2="17"/>
-        <line x1="23" y1="22" x2="23" y2="25"/>
-        <line x1="18" y1="34" x2="18" y2="37"/>
-        <line x1="22" y1="44" x2="22" y2="47"/>
-      </svg>
-    </div>
-    <!-- 小猫（黑白简笔画，基本几何图形） -->
-    <div class="cat">
-      <svg viewBox="0 0 120 90" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 尾巴：长方形（倾斜） -->
-        <g class="cat-tail">
-          <rect x="8" y="34" width="22" height="6" rx="2" transform="rotate(-18 19 37)"/>
-        </g>
-        <!-- 身体：长方形 -->
-        <rect x="26" y="36" width="52" height="24" rx="5"/>
-        <!-- 头：正方形 -->
-        <rect x="72" y="24" width="26" height="26" rx="4"/>
-        <!-- 耳朵：三角形 -->
-        <polygon points="74,24 78,12 86,24"/>
-        <polygon points="86,24 92,12 98,24"/>
-        <!-- 眼睛：小正方形 -->
-        <rect x="78" y="32" width="4" height="4" fill="#222" stroke="none"/>
-        <rect x="89" y="32" width="4" height="4" fill="#222" stroke="none"/>
-        <!-- 鼻子：小三角形 -->
-        <polygon points="94,39 98,41 94,43" fill="#222" stroke="none"/>
-        <!-- 嘴：线条 -->
-        <line x1="94" y1="43" x2="91" y2="47"/>
-        <line x1="94" y1="43" x2="97" y2="47"/>
-        <!-- 胡须：线条 -->
-        <line x1="98" y1="41" x2="108" y2="39"/>
-        <line x1="98" y1="44" x2="108" y2="46"/>
-        <!-- 腿：长方形（4条） -->
-        <rect class="leg leg-1" x="32" y="58" width="8" height="20" rx="2"/>
-        <rect class="leg leg-2" x="60" y="58" width="8" height="20" rx="2"/>
-        <rect class="leg leg-3" x="42" y="58" width="8" height="20" rx="2"/>
-        <rect class="leg leg-4" x="70" y="58" width="8" height="20" rx="2"/>
-      </svg>
-    </div>
+  <div class="constellation-wrap">
+    <svg class="constellation" viewBox="0 0 200 140" fill="none">
+      <!-- 背景小星星 -->
+      <circle class="bg-star" cx="12" cy="18" r="0.8"/>
+      <circle class="bg-star" cx="35" cy="10" r="1"/>
+      <circle class="bg-star" cx="58" cy="22" r="0.7"/>
+      <circle class="bg-star" cx="78" cy="8" r="0.9"/>
+      <circle class="bg-star" cx="100" cy="16" r="0.8"/>
+      <circle class="bg-star" cx="125" cy="12" r="1"/>
+      <circle class="bg-star" cx="150" cy="20" r="0.7"/>
+      <circle class="bg-star" cx="175" cy="14" r="0.9"/>
+      <circle class="bg-star" cx="190" cy="28" r="0.8"/>
+      <circle class="bg-star" cx="8" cy="50" r="0.7"/>
+      <circle class="bg-star" cx="25" cy="70" r="0.9"/>
+      <circle class="bg-star" cx="50" cy="85" r="0.8"/>
+      <circle class="bg-star" cx="75" cy="75" r="1"/>
+      <circle class="bg-star" cx="95" cy="95" r="0.7"/>
+      <circle class="bg-star" cx="120" cy="80" r="0.9"/>
+      <circle class="bg-star" cx="145" cy="100" r="0.8"/>
+      <circle class="bg-star" cx="165" cy="75" r="1"/>
+      <circle class="bg-star" cx="185" cy="90" r="0.7"/>
+      <circle class="bg-star" cx="15" cy="110" r="0.9"/>
+      <circle class="bg-star" cx="40" cy="125" r="0.8"/>
+      <circle class="bg-star" cx="65" cy="115" r="1"/>
+      <circle class="bg-star" cx="90" cy="128" r="0.7"/>
+      <circle class="bg-star" cx="115" cy="118" r="0.9"/>
+      <circle class="bg-star" cx="140" cy="130" r="0.8"/>
+      <circle class="bg-star" cx="170" cy="120" r="1"/>
+      <circle class="bg-star" cx="188" cy="112" r="0.7"/>
+      <!-- 动态星座内容（由JS生成） -->
+      <g id="constellationDynamic"></g>
+    </svg>
+    <div class="constellation-name" id="constellationName">北斗七星</div>
+    <div class="constellation-fact" id="constellationFact"></div>
   </div>
   <div class="loading-tips">
     <span class="tip-text" id="loadingTip">首次加载较慢，请稍候...</span>
@@ -227,6 +206,7 @@
 
 <!-- ===== 功能脚本 ===== -->
 <script src="Scripts/icon-loader.js"></script>
+<script src="Scripts/constellation.js"></script>
 <script src="Scripts/carousel.js"></script>
 <script src="Scripts/music.js"></script>
 <script src="Scripts/search.js"></script>
