@@ -113,6 +113,8 @@
   overflow-x: auto;
   scrollbar-width: none;
   margin-bottom: 24px;
+  flex-shrink: 0;
+  min-height: 36px;
 }
 .tag-scroll-wrap::-webkit-scrollbar { display: none; }
 .search-view.visible .tag-scroll-wrap {
