@@ -358,6 +358,20 @@
             align = "left";
           }
         }
+        /* 边界保护：如果标签超出画布，换到另一侧 */
+        var textWidth = ctx.measureText(star.label).width;
+        if (align === "left" && labelX + textWidth > W - 10) {
+          labelX = pos.x - size - 8;
+          align = "right";
+        } else if (align === "right" && labelX - textWidth < 10) {
+          labelX = pos.x + size + 8;
+          align = "left";
+        }
+        if (align === "center" && labelY < 15) {
+          labelY = pos.y + size + 12;
+        } else if (align === "center" && labelY > H - 10) {
+          labelY = pos.y - size - 8;
+        }
         ctx.textAlign = align;
         ctx.fillText(star.label, labelX, labelY);
       }
@@ -436,27 +450,6 @@
   if (nameCNEl) nameCNEl.textContent = first.nameCN;
   if (nameEl) nameEl.textContent = first.name;
   if (descEl) descEl.textContent = firstFact;
-
-  /* ===== 等待词轮播 ===== */
-  var loadingTextEl = document.getElementById("loadingText");
-  var loadingWords = [
-    "加载中", "正在加载", "请稍候", "马上就好",
-    "资源加载中", "正在准备", "稍等片刻", "加载资源",
-    "正在初始化", "请耐心等待"
-  ];
-  var wordIndex = 0;
-  if (loadingTextEl) loadingTextEl.textContent = loadingWords[0];
-  setInterval(function() {
-    if (stopped) return;
-    wordIndex = (wordIndex + 1) % loadingWords.length;
-    if (loadingTextEl) {
-      loadingTextEl.style.opacity = "0";
-      setTimeout(function() {
-        loadingTextEl.textContent = loadingWords[wordIndex];
-        loadingTextEl.style.opacity = "";
-      }, 300);
-    }
-  }, 2000);
 
   animate();
 
