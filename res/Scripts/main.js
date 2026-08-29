@@ -49,3 +49,13 @@ function handleAction(type) {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && searchOpen) toggleSearch();
 });
+
+/* 加载页面：所有资源加载完成后隐藏 */
+window.addEventListener("load", function() {
+  setTimeout(function() {
+    var loadingScreen = document.getElementById("loadingScreen");
+    if (loadingScreen) {
+      loadingScreen.classList.add("hidden");
+    }
+  }, 300);
+});
