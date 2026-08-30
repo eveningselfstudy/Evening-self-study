@@ -275,6 +275,7 @@
   function drawConstellation(c, progress, alpha, showLabels) {
     var totalSeg = c.links.length;
     var starsDrawn = {};
+    window._labelRects = [];
 
     /* 计算星座中心，用于标签定位（标签放在外侧，避免与连线重合） */
     var cx = 0, cy = 0;
