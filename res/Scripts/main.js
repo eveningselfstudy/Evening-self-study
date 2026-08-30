@@ -2,6 +2,16 @@
    主页主逻辑：初始化、页面跳转过渡、操作按钮、加载页控制
    ============================================================ */
 
+/* ===== 简单字符串哈希（djb2算法） ===== */
+function simpleHash(str) {
+  var hash = 5381;
+  for (var i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+    hash = hash & 0xffffffff;
+  }
+  return hash.toString(16);
+}
+
 /* ===== 多层全文件资源更新检测 ===== */
 /* 第一层：所有文件 HEAD 请求（Last-Modified + ETag + Content-Length）
    第二层：文本文件内容哈希（JS/CSS/HTML/SVG/数据）
@@ -80,11 +90,11 @@ async function checkResourceUpdate() {
       }
       if (headFingerprint) localStorage.setItem("head_" + url, headFingerprint);
 
-      /* ===== 第二层：文本文件内容哈希 ===== */
+      /* ===== 第二层：文本文件内容哈希（djb2全内容哈希） ===== */
       if (isTextFile(url)) {
         var contentRes = await fetch(url, { cache: "no-cache" });
         var text = await contentRes.text();
-        var hash = text.length + "|" + text.substring(0, 50) + "|" + text.substring(text.length - 50);
+        var hash = simpleHash(text);
         var cachedHash = localStorage.getItem("hash_" + url);
         if (cachedHash && cachedHash !== hash) {
           hasUpdate = true;
@@ -100,7 +110,7 @@ async function checkResourceUpdate() {
   try {
     var indexRes = await fetch("index.html", { cache: "no-cache" });
     var indexText = await indexRes.text();
-    var indexHash = indexText.length + "|" + indexText.substring(0, 80) + "|" + indexText.substring(indexText.length - 80);
+    var indexHash = simpleHash(indexText);
     var cachedIndex = localStorage.getItem("site_content_hash");
     if (cachedIndex && cachedIndex !== indexHash) {
       hasUpdate = true;
