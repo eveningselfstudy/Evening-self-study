@@ -78,19 +78,32 @@
 
       <!-- 音乐播放器（无左上角标签） -->
       <div class="music-card">
-        <div class="music-qq-header">
-          <span class="music-qq-title" id="musicTitle">音乐</span>
-          <div class="music-qq-switch">
-            <button class="music-qq-btn" onclick="prevMusic()" aria-label="上一首">
-              <span data-icon="prev"></span>
-            </button>
-            <button class="music-qq-btn" onclick="nextMusic()" aria-label="下一首">
-              <span data-icon="next"></span>
-            </button>
+        <div class="music-header">
+          <div class="music-cover" id="musicCover">
+            <img src="" alt="专辑封面" id="musicCoverImg">
+          </div>
+          <div class="music-info">
+            <div class="music-title" id="musicTitle">歌曲名称</div>
+            <div class="music-artist" id="musicArtist">歌手</div>
           </div>
         </div>
-        <div class="music-qq-wrap" id="musicQQWrap">
-          <!-- QQ音乐iframe由JS动态生成 -->
+        <div class="music-progress-wrap">
+          <span id="musicCurrent">00:52</span>
+          <div class="music-progress" id="musicProgress" onclick="seekMusic(event)">
+            <div class="music-progress-bar" id="musicProgressBar"></div>
+          </div>
+          <span id="musicTotal">02:56</span>
+        </div>
+        <div class="music-controls">
+          <button class="music-ctrl-btn" onclick="prevMusic()" aria-label="上一首">
+            <span data-icon="prev"></span>
+          </button>
+          <button class="music-ctrl-btn music-play-btn" id="musicPlayBtn" onclick="togglePlay()" aria-label="播放/暂停">
+            <svg id="musicPlayIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="music-ctrl-btn" onclick="nextMusic()" aria-label="下一首">
+            <span data-icon="next"></span>
+          </button>
         </div>
       </div>
     </div>
