@@ -1,3 +1,4 @@
+const SITE_ENABLED = true;
 /* ============================================================
    主页主逻辑：初始化、页面跳转过渡、操作按钮、加载页控制
    ============================================================ */
@@ -178,6 +179,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 
   /* 延迟淡出加载页 */
   setTimeout(function() {
+    /* 网站开关：false时永远停在加载页，保持正常加载状态 */
+    if (typeof SITE_ENABLED !== "undefined" && !SITE_ENABLED) {
+      return;
+    }
     var loadingScreen = document.getElementById("loadingScreen");
     if (loadingScreen) loadingScreen.classList.add("hidden");
   }, 400);
