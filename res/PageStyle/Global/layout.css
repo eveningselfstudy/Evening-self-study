@@ -22,9 +22,9 @@
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 20px 50px;
+  padding: 40px 24px 60px;
 }
 /* 主视图 */
 .main-view {
@@ -44,8 +44,8 @@
 /* 顶部：个人卡片 + 音乐播放器 并排 */
 .top-row {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
 }
 /* 日期图标 —— 通用 */
 .date-icon {
