@@ -136,6 +136,14 @@
 .theme-twilight .theme-preview span:nth-child(2) { background: #8b5cf6; }
 .theme-twilight .theme-preview span:nth-child(3) { background: #ec4899; }
 
+.theme-sunset .theme-preview span:nth-child(1) { background: #fff7ed; }
+.theme-sunset .theme-preview span:nth-child(2) { background: #fb923c; }
+.theme-sunset .theme-preview span:nth-child(3) { background: #f43f5e; }
+
+.theme-midnight .theme-preview span:nth-child(1) { background: #0f172a; }
+.theme-midnight .theme-preview span:nth-child(2) { background: #818cf8; }
+.theme-midnight .theme-preview span:nth-child(3) { background: #c084fc; }
+
 .theme-midnight .theme-preview span:nth-child(1) { background: #0f172a; }
 .theme-midnight .theme-preview span:nth-child(2) { background: #818cf8; }
 .theme-midnight .theme-preview span:nth-child(3) { background: #c084fc; }
