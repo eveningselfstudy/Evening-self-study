@@ -3,30 +3,8 @@
    通过 :root[data-theme="xxx"] 切换配色
    ============================================================ */
 
-/* 默认配色：暮光紫 */
+/* 默认配色：海洋蓝 */
 :root,
-:root[data-theme="twilight"] {
-  --text-primary: #2e1065;
-  --text-secondary: #5b21b6;
-  --text-muted: #a78bfa;
-  --accent: #7c3aed;
-  --accent-soft: #8b5cf6;
-  --accent-2: #ec4899;
-  --dot-blue: #8b5cf6;
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --card-bg-strong: rgba(255, 255, 255, 0.78);
-  --card-border: rgba(255, 255, 255, 0.45);
-  --shadow-soft: 0 6px 24px rgba(124, 58, 237, 0.12);
-  --shadow-hover: 0 10px 32px rgba(124, 58, 237, 0.2);
-  --bg-base: #faf5ff;
-  --bg-overlay: rgba(250, 245, 255, 0.3);
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* 配色：海洋蓝 */
 :root[data-theme="ocean"] {
   --text-primary: #1e293b;
   --text-secondary: #475569;
@@ -42,6 +20,28 @@
   --shadow-hover: 0 10px 32px rgba(37, 99, 235, 0.18);
   --bg-base: #eff6ff;
   --bg-overlay: rgba(239, 246, 255, 0.3);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 配色：暮光紫 */
+:root[data-theme="twilight"] {
+  --text-primary: #2e1065;
+  --text-secondary: #5b21b6;
+  --text-muted: #a78bfa;
+  --accent: #7c3aed;
+  --accent-soft: #8b5cf6;
+  --accent-2: #ec4899;
+  --dot-blue: #8b5cf6;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-bg-strong: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(255, 255, 255, 0.45);
+  --shadow-soft: 0 6px 24px rgba(124, 58, 237, 0.12);
+  --shadow-hover: 0 10px 32px rgba(124, 58, 237, 0.2);
+  --bg-base: #faf5ff;
+  --bg-overlay: rgba(250, 245, 255, 0.3);
 }
 
 /* 配色：薄荷绿 */
