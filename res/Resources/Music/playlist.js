@@ -1,11 +1,17 @@
-/* QQ音乐歌曲 mid 列表（在 y.qq.com 歌曲页面URL中获取）
-   示例：https://y.qq.com/n/ryqq/songDetail/002BW1w04c8Ixz
-   → mid 为 002BW1w04c8Ixz */
-const qqMusicMids = [
-  "002BW1w04c8Ixz"   // 恩几 - 爱旧爱
-];
-
-/* 歌曲名称（用于显示在卡片顶部） */
+/* ============================================================
+   音乐播放列表数据对象
+   每首歌是一个对象，字段说明：
+     title  : 歌曲名
+     artist : 歌手名
+     cover  : 专辑封面路径（相对于 Resources/Music/）
+     file   : 音乐文件路径（相对于 Resources/Music/）
+   时长(duration)由代码自动生成，无需在此填写
+   ============================================================ */
 const playlist = [
-  { title: "爱旧爱" }
+  {
+    title: "歌曲名称",
+    artist: "歌手",
+    cover: "1.jpg",
+    file: "1.mp3"
+  }
 ];
