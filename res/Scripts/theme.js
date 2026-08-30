@@ -4,12 +4,13 @@
    选择保存在 localStorage，页面加载时自动应用
    ============================================================ */
 const THEME_KEY = "blog_theme";
-const DEFAULT_THEME = "ocean";
+const DEFAULT_THEME = "twilight";
 
 const THEMES = [
-  { id: "sakura",   name: "樱粉" },
   { id: "ocean",    name: "海洋蓝" },
+  { id: "sakura",   name: "樱粉" },
   { id: "mint",     name: "薄荷绿" },
+  { id: "sunset",   name: "日落橙" },
   { id: "twilight", name: "暮光紫" },
   { id: "midnight", name: "暗夜黑" }
 ];
