@@ -67,6 +67,7 @@
   width: 100%;
   height: 86px;
   border: none;
+  background: transparent;
 }
 
 /* 小屏适配 */
