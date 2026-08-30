@@ -69,7 +69,7 @@ function toggleSearch() {
       // 强制重排，确保 animation 从 0% 开始
       void searchView.offsetWidth;
       searchView.classList.add("visible");
-      setTimeout(() => document.getElementById("searchInput").focus(), 750);
+      /* 移除自动聚焦，用户点击搜索框后才进入输入状态 */
     }, 420);
   } else {
     searchOpen = false;
