@@ -3,6 +3,16 @@
    ============================================================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* 移除点击时的蓝色焦点轮廓和移动端高亮 */
+button, a, [role="button"], input, textarea, select {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus, a:focus, [role="button"]:focus,
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
