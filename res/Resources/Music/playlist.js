@@ -1,18 +1,10 @@
-/* ============================================================
-   音乐播放列表数据对象
-   每首歌是一个对象，字段说明：
-     title  : 歌曲名
-     artist : 歌手名
-     cover  : 专辑封面路径（相对于 Resources/Music/）
-     file   : 音乐文件路径（相对于 Resources/Music/）
-   时长(duration)由代码自动生成，无需在此填写
-   ============================================================ */
-/* QQ音乐歌曲ID列表（在 music.163.com 歌曲页面URL中获取）
-   示例：https://music.163.com/#/song?id=123456 → id 为 123456 */
-const qqMusicIds = [
-  "1824021638",  // 示例ID，请替换为你自己的歌曲ID
-  "1901371643",  // 示例ID
-  "1330348067"   // 示例ID
+/* QQ音乐歌曲 mid 列表（在 y.qq.com 歌曲页面URL中获取）
+   示例：https://y.qq.com/n/ryqq/songDetail/003aAYrm3GE0Ac
+   → mid 为 003aAYrm3GE0Ac */
+const qqMusicMids = [
+  "003aAYrm3GE0Ac",  // 示例mid，请替换为你自己的歌曲mid
+  "001fLq3w0J5ZcE",  // 示例mid
+  "002Z45aD1g5XjC"   // 示例mid
 ];
 
 /* 歌曲名称（用于显示在卡片顶部） */
