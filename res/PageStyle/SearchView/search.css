@@ -207,8 +207,8 @@
   z-index: 2;
   transform: scale(0);
 }
-.timeline-item:nth-child(odd)::after { right: 10px; }
-.timeline-item:nth-child(even)::after { left: 10px; }
+.timeline-item:nth-child(odd)::after { right: -7px; }
+.timeline-item:nth-child(even)::after { left: -7px; }
 
 .search-view.visible .timeline-item {
   animation: timelineItemIn 0.5s var(--ease-out) forwards;
