@@ -221,7 +221,7 @@ function handleAction(type) {
       window.open("https://github.com/eveningselfstudy/Evening-self-study", "_blank");
       break;
     case 'docs':
-      window.open("https://www.kdocs.cn/l/cnuFStaqc8R2", "_blank");
+      window.open("https://www.kdocs.cn/l/csuQCyb2syya", "_blank");
       break;
   }
 }
