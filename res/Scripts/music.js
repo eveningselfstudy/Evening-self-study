@@ -1,6 +1,6 @@
 /* ============================================================
    QQ音乐嵌入式播放器
-   通过 iframe 嵌入 QQ音乐官方外嵌播放器
+   通过 iframe 嵌入 QQ音乐播放器
    歌曲mid配置在 Resources/Music/playlist.js 的 qqMusicMids 数组
    ============================================================ */
 let musicIndex = 0;
@@ -20,12 +20,12 @@ function loadQQMusic() {
 
   if (titleEl && song) titleEl.textContent = song.title || "音乐";
 
-  /* QQ音乐官方外嵌播放器（portal/player.html 专门用于嵌入） */
+  /* QQ音乐播放器嵌入 */
   wrap.innerHTML =
     '<iframe frameborder="0" border="0" marginwidth="0" marginheight="0" ' +
-    'class="music-qq-iframe" scrolling="no" allow="autoplay" ' +
-    'src="https://y.qq.com/portal/player.html?songlist=' + songMid +
-    '&mode=singlesong"></iframe>';
+    'class="music-qq-iframe" scrolling="no" ' +
+    'src="https://y.qq.com/n/ryqq/songDetail/' + songMid +
+    '?iframe=1&songtype=0"></iframe>';
 }
 
 /* 上一首 */
