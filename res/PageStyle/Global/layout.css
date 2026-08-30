@@ -24,13 +24,13 @@
   min-height: 100vh;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 56px 24px 36px;
 }
 /* 主视图 */
 .main-view {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
   transition: opacity 0.4s var(--ease-out), transform 0.45s var(--ease-out);
 }
 .main-view.closing {
